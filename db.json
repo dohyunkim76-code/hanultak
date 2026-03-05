@@ -21,6 +21,14 @@
       "division": "2부",
       "position": "감사",
       "cumulativePoints": 10
+    },
+    {
+      "id": "rv3b4m5j1",
+      "name": "황병일",
+      "gender": "남",
+      "division": "3부",
+      "position": "부회장",
+      "cumulativePoints": 0
     }
   ],
   "attendance": {},
