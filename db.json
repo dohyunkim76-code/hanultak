@@ -117,6 +117,14 @@
       "division": "4부",
       "position": "진행이사",
       "cumulativePoints": 0
+    },
+    {
+      "id": "09oliy2yc",
+      "name": "장용화",
+      "gender": "남",
+      "division": "3부",
+      "position": "일반회원",
+      "cumulativePoints": 0
     }
   ],
   "attendance": {},
