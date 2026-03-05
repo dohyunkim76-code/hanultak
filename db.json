@@ -69,6 +69,14 @@
       "division": "3부",
       "position": "총무",
       "cumulativePoints": 0
+    },
+    {
+      "id": "8dp50mxsh",
+      "name": "최영만",
+      "gender": "남",
+      "division": "5부",
+      "position": "일반회원",
+      "cumulativePoints": 0
     }
   ],
   "attendance": {},
