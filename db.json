@@ -159,6 +159,16 @@
       "authorName": "김도현",
       "createdAt": "2026-03-05T12:19:35.879Z",
       "comments": []
+    },
+    {
+      "id": "vcrx99fn8",
+      "title": "방문예약 탭을 통해서, 탁구장 내려오실 시간을 정해 주세요.",
+      "content": "방문 가능하신 시간과 이름 적어주시면 되요.",
+      "pinned": false,
+      "authorId": "acq81v29u",
+      "authorName": "김도현",
+      "createdAt": "2026-03-05T12:21:29.983Z",
+      "comments": []
     }
   ],
   "visits": [
