@@ -109,6 +109,14 @@
       "division": "3부",
       "position": "일반회원",
       "cumulativePoints": 0
+    },
+    {
+      "id": "4xmzguj3m",
+      "name": "신미혜",
+      "gender": "여",
+      "division": "4부",
+      "position": "진행이사",
+      "cumulativePoints": 0
     }
   ],
   "attendance": {},
