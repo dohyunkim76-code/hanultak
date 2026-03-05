@@ -77,6 +77,14 @@
       "division": "5부",
       "position": "일반회원",
       "cumulativePoints": 0
+    },
+    {
+      "id": "q2unjcs4z",
+      "name": "안상언",
+      "gender": "남",
+      "division": "2부",
+      "position": "일반회원",
+      "cumulativePoints": 3
     }
   ],
   "attendance": {},
