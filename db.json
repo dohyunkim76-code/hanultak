@@ -85,6 +85,14 @@
       "division": "2부",
       "position": "일반회원",
       "cumulativePoints": 3
+    },
+    {
+      "id": "pq4old39i",
+      "name": "민갑중",
+      "gender": "여",
+      "division": "6부",
+      "position": "일반회원",
+      "cumulativePoints": 0
     }
   ],
   "attendance": {},
