@@ -135,7 +135,14 @@
       "cumulativePoints": 0
     }
   ],
-  "attendance": {},
+  "attendance": {
+    "2026-03-05": {
+      "offline": [],
+      "online": [
+        "acq81v29u"
+      ]
+    }
+  },
   "meetings": [],
   "posts": [],
   "visits": [],
