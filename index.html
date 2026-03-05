@@ -199,9 +199,12 @@ select option{background:#fff;color:#1e293b;}
 var DIVS = ['1부','2부','3부','4부','5부','6부','7부'];
 var POSITIONS = ['일반회원','회장','부회장','감사','총무','진행이사','홍보이사'];
 
-// JSONbin.io 설정
-var BACKUP_BIN_ID  = '69a90e88ae596e708f60d554';
-var BACKUP_API_KEY = '$2a$10$2RhYjd6npITdidpVL1xW9.32YPCOQzEHIN4Y/Sadb4w/sr7FVURqG';
+// GitHub 저장소 설정
+var GH_USER  = 'dohyunkim76-code';
+var GH_REPO  = 'hanultak';
+var GH_FILE  = 'db.json';
+var GH_TOKEN = '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';
+var GH_API   = 'https://api.github.com/repos/'+GH_USER+'/'+GH_REPO+'/contents/'+GH_FILE;
 
 // ════════════════════════════════════════════════════════════
 // 유틸
@@ -227,11 +230,20 @@ function showToast(msg, isErr){
 }
 
 // ════════════════════════════════════════════════════════════
-// DB (JSONbin.io 클라우드 저장소)
+// DB (GitHub 클라우드 저장소)
 // ════════════════════════════════════════════════════════════
 var DB = null;
+var DB_SHA = null;   // GitHub 파일 수정 시 필요한 SHA
 var saveTimer = null;
 var isSaving = false;
+
+function _ghHeaders(){
+  return {
+    'Authorization': 'token '+GH_TOKEN,
+    'Content-Type': 'application/json',
+    'Accept': 'application/vnd.github.v3+json'
+  };
+}
 
 function _initDB(data){
   DB = data || {};
@@ -245,21 +257,25 @@ function _initDB(data){
 }
 
 function loadDB(){
-  return fetch('https://api.jsonbin.io/v3/b/'+BACKUP_BIN_ID+'/latest', {
-    headers: {
-      'X-Master-Key': BACKUP_API_KEY,
-      'X-Bin-Meta': 'false'
-    }
-  })
+  return fetch(GH_API+'?t='+Date.now(), { headers: _ghHeaders() })
   .then(function(r){
+    if(r.status === 404){
+      // db.json 파일이 아직 없으면 빈 초기값으로 시작
+      DB_SHA = null;
+      _initDB({});
+      return;
+    }
     if(!r.ok) throw new Error('HTTP '+r.status);
     return r.json();
   })
-  .then(function(data){
-    _initDB(data);
+  .then(function(res){
+    if(!res) return;
+    DB_SHA = res.sha;
+    var json = decodeURIComponent(escape(atob(res.content.replace(/\n/g,''))));
+    _initDB(JSON.parse(json));
   })
-  .catch(function(){
-    // 네트워크 오류 시 빈 초기값으로 시작
+  .catch(function(err){
+    console.warn('loadDB 오류:', err);
     _initDB({});
   });
 }
@@ -269,18 +285,25 @@ function saveDB(immediate){
   function doSave(){
     if(isSaving) return;
     isSaving = true;
-    var payload = JSON.parse(JSON.stringify(DB));
-    fetch('https://api.jsonbin.io/v3/b/'+BACKUP_BIN_ID, {
+    var content = btoa(unescape(encodeURIComponent(JSON.stringify(DB, null, 2))));
+    var body = {
+      message: 'DB 업데이트 '+new Date().toLocaleString('ko-KR'),
+      content: content
+    };
+    if(DB_SHA) body.sha = DB_SHA;
+    fetch(GH_API, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': BACKUP_API_KEY
-      },
-      body: JSON.stringify(payload)
+      headers: _ghHeaders(),
+      body: JSON.stringify(body)
     })
     .then(function(r){
       isSaving = false;
       if(!r.ok) throw new Error('HTTP '+r.status);
+      return r.json();
+    })
+    .then(function(res){
+      // SHA 갱신 (다음 저장에 필요)
+      if(res && res.content) DB_SHA = res.content.sha;
     })
     .catch(function(err){
       isSaving = false;
@@ -292,25 +315,27 @@ function saveDB(immediate){
 }
 
 // ════════════════════════════════════════════════════════════
-// JSONbin.io 수동 내보내기 / 불러오기 (디버그용)
+// 수동 저장 / 다시 불러오기
 // ════════════════════════════════════════════════════════════
 function backupToJsonbin(onDone){
-  // saveDB와 동일 동작 (JSONbin이 이미 주 저장소)
-  var payload = JSON.parse(JSON.stringify(DB));
   DB.settings = DB.settings || {};
   DB.settings.lastBackupDate = today();
   DB.settings.lastBackupTime = new Date().toLocaleString('ko-KR');
-  fetch('https://api.jsonbin.io/v3/b/'+BACKUP_BIN_ID, {
+  var content = btoa(unescape(encodeURIComponent(JSON.stringify(DB, null, 2))));
+  var body = { message: '수동 저장 '+new Date().toLocaleString('ko-KR'), content: content };
+  if(DB_SHA) body.sha = DB_SHA;
+  fetch(GH_API, {
     method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Master-Key': BACKUP_API_KEY
-    },
-    body: JSON.stringify(DB)
+    headers: _ghHeaders(),
+    body: JSON.stringify(body)
   })
   .then(function(r){
     if(!r.ok) throw new Error('HTTP '+r.status);
-    showToast('✅ 저장 완료!');
+    return r.json();
+  })
+  .then(function(res){
+    if(res && res.content) DB_SHA = res.content.sha;
+    showToast('✅ GitHub 저장 완료!');
     if(onDone) onDone(true);
   })
   .catch(function(err){
@@ -320,40 +345,19 @@ function backupToJsonbin(onDone){
 }
 
 function restoreFromJsonbin(onDone){
-  fetch('https://api.jsonbin.io/v3/b/'+BACKUP_BIN_ID+'/latest', {
-    headers: {
-      'X-Master-Key': BACKUP_API_KEY,
-      'X-Bin-Meta': 'false'
-    }
-  })
-  .then(function(r){
-    if(!r.ok) throw new Error('HTTP '+r.status);
-    return r.json();
-  })
-  .then(function(data){
-    if(!confirm('클라우드 데이터를 다시 불러옵니다.\n\n⚠️ 현재 화면의 데이터가 클라우드 데이터로 교체됩니다. 계속하시겠습니까?')) return;
-    _initDB(data);
+  if(!confirm('GitHub에서 최신 데이터를 다시 불러옵니다.\n\n⚠️ 현재 화면 데이터가 교체됩니다. 계속하시겠습니까?')) return;
+  loadDB().then(function(){
     render();
-    showToast('✅ 클라우드에서 불러오기 완료!');
+    showToast('✅ GitHub에서 불러오기 완료!');
     if(onDone) onDone(true);
-  })
-  .catch(function(err){
+  }).catch(function(err){
     showToast('❌ 불러오기 실패: '+err.message, true);
     if(onDone) onDone(false);
   });
 }
 
-// 자동 백업 (관리자 로그인 시 - 사실상 저장 확인용)
 function autoBackupIfNeeded(){
-  if(!DB.settings) return;
-  var lastDate = DB.settings.lastBackupDate || '';
-  if(lastDate !== today()){
-    setTimeout(function(){
-      DB.settings.lastBackupDate = today();
-      DB.settings.lastBackupTime = new Date().toLocaleString('ko-KR');
-      saveDB(true);
-    }, 2000);
-  }
+  // GitHub 저장소 방식에서는 별도 자동백업 불필요 (saveDB가 곧 저장)
 }
 
 // ════════════════════════════════════════════════════════════
@@ -1995,15 +1999,15 @@ function pgSettings(){
   var ht=div('','font-weight:800;font-size:15px;margin-bottom:14px');
   ht.textContent='🔧 설정'; f.appendChild(ht);
 
-  // JSONbin 클라우드 저장
-  var bkc = card('☁️ 클라우드 저장소','');
+  // GitHub 클라우드 저장
+  var bkc = card('☁️ GitHub 클라우드 저장','');
   var lastBk = (DB.settings && DB.settings.lastBackupTime) ? DB.settings.lastBackupTime : '없음';
   var lastDate = (DB.settings && DB.settings.lastBackupDate) ? DB.settings.lastBackupDate : '';
   var isTodayBk = (lastDate === today());
   var infoD = div('','font-size:12px;color:#64748b;margin-bottom:10px;line-height:1.8');
   infoD.innerHTML = '마지막 저장: <span style="color:'+(isTodayBk?'#10b981':'#f59e0b')+';font-weight:700">'
     +lastBk+'</span>'+(isTodayBk?' ✅':' ⚠️')
-    +'<br><span style="font-size:11px;color:#94a3b8">데이터는 JSONbin.io에 실시간 저장됩니다.</span>';
+    +'<br><span style="font-size:11px;color:#94a3b8">데이터는 GitHub 저장소(db.json)에 자동 저장됩니다.</span>';
   bkc.appendChild(infoD);
   var bkBtnWr = div('','display:flex;gap:8px;flex-wrap:wrap');
   var manualBtn = btn('bBlue','📤 지금 저장', function(){
@@ -2014,7 +2018,7 @@ function pgSettings(){
       manualBtn.textContent = '📤 지금 저장';
       var newTime = (DB.settings && DB.settings.lastBackupTime) ? DB.settings.lastBackupTime : '';
       infoD.innerHTML = '마지막 저장: <span style="color:#10b981;font-weight:700">'+newTime+'</span> ✅'
-        +'<br><span style="font-size:11px;color:#94a3b8">데이터는 JSONbin.io에 실시간 저장됩니다.</span>';
+        +'<br><span style="font-size:11px;color:#94a3b8">데이터는 GitHub 저장소(db.json)에 자동 저장됩니다.</span>';
     });
   });
   var restBtn = btn('bAmber','📥 다시 불러오기', function(){
@@ -2023,7 +2027,7 @@ function pgSettings(){
   ap(bkBtnWr, manualBtn, restBtn);
   bkc.appendChild(bkBtnWr);
   var bkNote = div('infoBox','margin-top:10px');
-  bkNote.innerHTML='💡 모든 데이터는 JSONbin.io 클라우드에 자동 저장됩니다.<br>'
+  bkNote.innerHTML='💡 모든 데이터는 GitHub 저장소의 db.json 파일에 저장됩니다.<br>'
     +'어떤 기기에서 접속해도 동일한 데이터를 사용할 수 있습니다.';
   bkc.appendChild(bkNote);
   f.appendChild(bkc);
@@ -2091,8 +2095,8 @@ function pgSettings(){
   var ic=card('🏓 앱 정보','');
   ic.innerHTML='<div style="font-size:13px;color:#475569;line-height:2">'
     +'<div>📛 하늘탁 - 임은코오롱 하늘채 탁구동호회</div>'
-    +'<div>🗓️ 버전: 2.1 (2026.03)</div>'
-    +'<div>💾 저장: JSONbin.io 클라우드</div>'
+    +'<div>🗓️ 버전: 2.2 (2026.03)</div>'
+    +'<div>💾 저장: GitHub (db.json)</div>'
     +'<div>🚀 배포: Netlify</div>'
     +'</div>';
   f.appendChild(ic);
