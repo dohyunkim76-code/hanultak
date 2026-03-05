@@ -5,7 +5,16 @@
     "tempPw": "",
     "tempDate": ""
   },
-  "members": [],
+  "members": [
+    {
+      "id": "acq81v29u",
+      "name": "김도현",
+      "gender": "남",
+      "division": "3부",
+      "position": "회장",
+      "cumulativePoints": 5
+    }
+  ],
   "attendance": {},
   "meetings": [],
   "posts": [],
