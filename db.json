@@ -45,6 +45,14 @@
       "division": "3부",
       "position": "진행이사",
       "cumulativePoints": 0
+    },
+    {
+      "id": "g2rj2yzr5",
+      "name": "백혜설",
+      "gender": "여",
+      "division": "5부",
+      "position": "홍보이사",
+      "cumulativePoints": 0
     }
   ],
   "attendance": {},
