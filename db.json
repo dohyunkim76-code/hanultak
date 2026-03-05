@@ -101,6 +101,14 @@
       "division": "6부",
       "position": "일반회원",
       "cumulativePoints": 0
+    },
+    {
+      "id": "zl24g9nz8",
+      "name": "석춘성",
+      "gender": "남",
+      "division": "3부",
+      "position": "일반회원",
+      "cumulativePoints": 0
     }
   ],
   "attendance": {},
