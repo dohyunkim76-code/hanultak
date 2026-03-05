@@ -149,7 +149,18 @@
     }
   },
   "meetings": [],
-  "posts": [],
+  "posts": [
+    {
+      "id": "gwdgn2txd",
+      "title": "[공지] 같이 나눌 이야기가 있으면 여기 올리셔도 좋아요.",
+      "content": "단톡방에 올리셔도 좋지만, 여기도 좋은 게시판이랍니다.",
+      "pinned": true,
+      "authorId": "acq81v29u",
+      "authorName": "김도현",
+      "createdAt": "2026-03-05T12:19:35.879Z",
+      "comments": []
+    }
+  ],
   "visits": [
     {
       "id": "2c4dspdv4",
