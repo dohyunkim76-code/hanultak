@@ -13,6 +13,14 @@
       "division": "3부",
       "position": "회장",
       "cumulativePoints": 5
+    },
+    {
+      "id": "nz5aen2m5",
+      "name": "한형신",
+      "gender": "남",
+      "division": "2부",
+      "position": "감사",
+      "cumulativePoints": 10
     }
   ],
   "attendance": {},
