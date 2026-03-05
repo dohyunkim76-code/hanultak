@@ -125,6 +125,14 @@
       "division": "3부",
       "position": "일반회원",
       "cumulativePoints": 0
+    },
+    {
+      "id": "rteueuxtl",
+      "name": "김정선",
+      "gender": "여",
+      "division": "5부",
+      "position": "일반회원",
+      "cumulativePoints": 0
     }
   ],
   "attendance": {},
