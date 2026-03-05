@@ -37,6 +37,14 @@
       "division": "4부",
       "position": "총무",
       "cumulativePoints": 0
+    },
+    {
+      "id": "3mc0pp5b4",
+      "name": "김륜하",
+      "gender": "남",
+      "division": "3부",
+      "position": "일반회원",
+      "cumulativePoints": 0
     }
   ],
   "attendance": {},
