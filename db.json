@@ -150,7 +150,18 @@
   },
   "meetings": [],
   "posts": [],
-  "visits": [],
+  "visits": [
+    {
+      "id": "2c4dspdv4",
+      "date": "2026-03-05",
+      "startSlot": "20:00",
+      "endSlot": "22:00",
+      "timeSlot": "20:00",
+      "memberName": "김도현",
+      "note": "",
+      "createdAt": "2026-03-05T12:18:19.920Z"
+    }
+  ],
   "settings": {
     "lastBackupDate": "2026-03-05",
     "lastBackupTime": "2026. 3. 5. 오후 9:10:42"
