@@ -233,7 +233,7 @@ function showToast(msg, isErr){
 // DB (GitHub 클라우드 저장소)
 // ════════════════════════════════════════════════════════════
 var DB = null;
-var DB_SHA = null;   // GitHub 파일 수정 시 필요한 SHA
+var DB_SHA = null;
 var saveTimer = null;
 var isSaving = false;
 
@@ -259,12 +259,7 @@ function _initDB(data){
 function loadDB(){
   return fetch(GH_API+'?t='+Date.now(), { headers: _ghHeaders() })
   .then(function(r){
-    if(r.status === 404){
-      // db.json 파일이 아직 없으면 빈 초기값으로 시작
-      DB_SHA = null;
-      _initDB({});
-      return;
-    }
+    if(r.status === 404){ DB_SHA = null; _initDB({}); return; }
     if(!r.ok) throw new Error('HTTP '+r.status);
     return r.json();
   })
@@ -286,10 +281,7 @@ function saveDB(immediate){
     if(isSaving) return;
     isSaving = true;
     var content = btoa(unescape(encodeURIComponent(JSON.stringify(DB, null, 2))));
-    var body = {
-      message: 'DB 업데이트 '+new Date().toLocaleString('ko-KR'),
-      content: content
-    };
+    var body = { message: 'DB 업데이트 '+new Date().toLocaleString('ko-KR'), content: content };
     if(DB_SHA) body.sha = DB_SHA;
     fetch(GH_API, {
       method: 'PUT',
@@ -302,7 +294,6 @@ function saveDB(immediate){
       return r.json();
     })
     .then(function(res){
-      // SHA 갱신 (다음 저장에 필요)
       if(res && res.content) DB_SHA = res.content.sha;
     })
     .catch(function(err){
@@ -314,10 +305,7 @@ function saveDB(immediate){
   else saveTimer = setTimeout(doSave, 1200);
 }
 
-// ════════════════════════════════════════════════════════════
-// 수동 저장 / 다시 불러오기
-// ════════════════════════════════════════════════════════════
-function backupToJsonbin(onDone){
+function manualSave(onDone){
   DB.settings = DB.settings || {};
   DB.settings.lastBackupDate = today();
   DB.settings.lastBackupTime = new Date().toLocaleString('ko-KR');
@@ -344,7 +332,7 @@ function backupToJsonbin(onDone){
   });
 }
 
-function restoreFromJsonbin(onDone){
+function reloadFromGithub(onDone){
   if(!confirm('GitHub에서 최신 데이터를 다시 불러옵니다.\n\n⚠️ 현재 화면 데이터가 교체됩니다. 계속하시겠습니까?')) return;
   loadDB().then(function(){
     render();
@@ -356,9 +344,7 @@ function restoreFromJsonbin(onDone){
   });
 }
 
-function autoBackupIfNeeded(){
-  // GitHub 저장소 방식에서는 별도 자동백업 불필요 (saveDB가 곧 저장)
-}
+function autoBackupIfNeeded(){ /* GitHub 방식에서는 saveDB가 곧 저장 */ }
 
 // ════════════════════════════════════════════════════════════
 // 인증
@@ -2013,7 +1999,7 @@ function pgSettings(){
   var manualBtn = btn('bBlue','📤 지금 저장', function(){
     manualBtn.disabled = true;
     manualBtn.textContent = '저장 중...';
-    backupToJsonbin(function(){
+    manualSave(function(){
       manualBtn.disabled = false;
       manualBtn.textContent = '📤 지금 저장';
       var newTime = (DB.settings && DB.settings.lastBackupTime) ? DB.settings.lastBackupTime : '';
@@ -2022,7 +2008,7 @@ function pgSettings(){
     });
   });
   var restBtn = btn('bAmber','📥 다시 불러오기', function(){
-    restoreFromJsonbin();
+    reloadFromGithub();
   });
   ap(bkBtnWr, manualBtn, restBtn);
   bkc.appendChild(bkBtnWr);
