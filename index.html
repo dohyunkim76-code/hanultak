@@ -15,17 +15,14 @@ input,select{width:100%;background:#fff;border:1.5px solid #cbd5e1;border-radius
 input::placeholder{color:#94a3b8;}
 select option{background:#fff;color:#1e293b;}
 
-/* 레이아웃 */
 #app{display:none;}
 #loginWrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#e0f2fe,#fef9c3,#fce7f3);}
 .loginBox{background:#fff;border-radius:20px;padding:32px 24px;width:100%;max-width:340px;box-shadow:0 8px 32px rgba(14,165,233,.15);}
 
-/* 로딩 */
 #loadWrap{position:fixed;inset:0;background:linear-gradient(135deg,#e0f2fe,#fef9c3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:9999;}
 .spinner{width:40px;height:40px;border:4px solid #bfdbfe;border-top-color:#0ea5e9;border-radius:50%;animation:spin .7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* 헤더 */
 #header{background:linear-gradient(90deg,#0ea5e9,#06b6d4,#10b981);padding:11px 15px;display:flex;align-items:center;gap:9px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(14,165,233,.3);}
 .hTitle{font-size:18px;font-weight:900;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.2);}
 .hSub{font-size:10px;color:rgba(255,255,255,.8);}
@@ -35,22 +32,18 @@ select option{background:#fff;color:#1e293b;}
 .ab-temp{background:rgba(255,255,255,.2);color:#fef9c3;}
 .ab-member{background:rgba(255,255,255,.2);color:#fff;}
 
-/* 탭 */
 #tabBar{display:flex;background:#fff;border-bottom:2px solid #e0f2fe;position:sticky;top:53px;z-index:99;box-shadow:0 2px 8px rgba(14,165,233,.1);}
 .tabBtn{flex:1;min-width:0;padding:7px 1px 5px;background:none;border:none;border-bottom:3px solid transparent;color:#94a3b8;cursor:pointer;font-size:8px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:1px;transition:all .15s;}
 .tabBtn.on{color:#0ea5e9;border-bottom-color:#0ea5e9;font-weight:900;}
 .tabIcon{font-size:15px;}
 
-/* 본문 */
 #page{padding:13px;max-width:640px;margin:0 auto;padding-bottom:50px;}
 
-/* 카드 */
 .card{background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;border:1.5px solid #e0f2fe;box-shadow:0 2px 8px rgba(14,165,233,.07);}
 .cardHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
 .cardTitle{font-weight:800;font-size:14px;color:#0f172a;}
 .cardSub{font-size:11px;color:#64748b;}
 
-/* 버튼 */
 .btn{padding:9px 15px;border:none;border-radius:10px;color:#fff;cursor:pointer;font-size:13px;font-weight:700;white-space:nowrap;}
 .btn:disabled{opacity:.4;cursor:not-allowed;}
 .bGreen{background:linear-gradient(135deg,#10b981,#059669);}
@@ -62,7 +55,6 @@ select option{background:#fff;color:#1e293b;}
 .bSm{padding:5px 10px;font-size:12px;} .bXs{padding:3px 7px;font-size:11px;}
 .bBlock{width:100%;display:block;text-align:center;}
 
-/* 배지 */
 .bdg{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;}
 .bdgGreen{background:#d1fae5;color:#059669;}
 .bdgAmber{background:#fef9c3;color:#d97706;}
@@ -71,71 +63,63 @@ select option{background:#fff;color:#1e293b;}
 .bdgSlate{background:#f1f5f9;color:#475569;}
 .bdgPurple{background:#ede9fe;color:#7c3aed;}
 
-/* 아바타 */
 .avt{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;}
 .avtM{background:#dbeafe;border:2px solid #60a5fa;color:#2563eb;}
 .avtF{background:#fce7f3;border:2px solid #f472b6;color:#db2777;}
 
-/* 폼 */
 .fLabel{display:block;font-size:10px;color:#64748b;margin-bottom:4px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;}
 .fGroup{margin-bottom:10px;}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;}
 
-/* 내부 탭 */
 .iTabs{display:flex;background:#f0f9ff;border-radius:10px;padding:3px;gap:3px;margin-bottom:10px;border:1px solid #e0f2fe;}
 .iTab{flex:1;padding:7px;border:none;border-radius:8px;cursor:pointer;font-weight:700;font-size:12px;background:transparent;color:#64748b;}
 .iTab.on{background:#0ea5e9;color:#fff;box-shadow:0 2px 6px rgba(14,165,233,.3);}
 
-/* 체크 */
 .chkBox{width:17px;height:17px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:2px solid #cbd5e1;background:#fff;cursor:pointer;}
 .chkBox.on{background:#10b981;border-color:#10b981;}
 
-/* 점수 버튼 */
 .pmBtn{width:30px;height:30px;border:none;border-radius:6px;color:#fff;cursor:pointer;font-size:18px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
 .scoreNum{width:30px;text-align:center;font-weight:900;font-size:18px;color:#0ea5e9;}
 
-/* 칩 */
 .chip{display:inline-block;padding:5px 11px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600;border:1.5px solid #e2e8f0;margin:3px;}
 .chipOn{background:#0ea5e9;color:#fff;border-color:#0ea5e9;}
 .chipOff{background:#f8fafc;color:#94a3b8;}
 .chipA{background:#dbeafe;color:#2563eb;border-color:#bfdbfe;}
 .chipB{background:#fef9c3;color:#d97706;border-color:#fde68a;}
 
-/* 스코어보드 */
 .sbWrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
-.sbTable{border-collapse:collapse;font-size:11px;}
-.sbTable th,.sbTable td{border:1px solid #e2e8f0;padding:5px 7px;text-align:center;white-space:nowrap;}
-.sbTable th{background:#f0f9ff;color:#475569;font-weight:700;}
-.sbTable .nameCol{text-align:left;background:#f0f9ff;font-weight:700;}
-.sbTable .self{background:#f8fafc;color:#cbd5e1;}
+.sbTable{border-collapse:collapse;font-size:11px;background:#fff;}
+.sbTable th,.sbTable td{border:1px solid #cbd5e1;padding:5px 7px;text-align:center;white-space:nowrap;}
+.sbTable th{background:#f0f9ff;color:#1e293b;font-weight:700;}
+.sbTable .nameCol{text-align:left;background:#f0f9ff;font-weight:700;color:#0f172a;}
+.sbTable .self{background:#f1f5f9;color:#94a3b8;}
 .sbTable .won{color:#059669;font-weight:700;}
 .sbTable .lost{color:#dc2626;}
 .sbTable .tot{background:#e0f2fe;font-weight:800;color:#0ea5e9;}
 
-/* 순위 행 */
-.rankRow{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f1f5f9;}
+.rankRow{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #e0f2fe;}
 .rankRow:last-child{border-bottom:none;}
 
-/* 통계 그리드 */
 .statGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
 .statBox{background:#fff;border-radius:12px;padding:12px;border:1.5px solid #e0f2fe;}
 
-/* 출석 */
 .attGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .attBox{background:#fff;border-radius:12px;overflow:hidden;border:1.5px solid #e0f2fe;}
 .attHead{padding:8px 12px;font-weight:700;font-size:12px;}
 .attBody{padding:7px;}
 .attItem{padding:7px 8px;border-radius:8px;display:flex;align-items:center;gap:6px;margin-bottom:2px;}
 
-/* 뒤로가기 */
 .backBtn{background:none;border:none;color:#0ea5e9;cursor:pointer;font-size:22px;padding:0;margin-right:6px;line-height:1;}
 
-/* 토스트 */
 #toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%) translateY(20px);background:linear-gradient(135deg,#10b981,#0ea5e9);color:#fff;padding:9px 18px;border-radius:20px;font-size:13px;font-weight:700;z-index:9999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;box-shadow:0 4px 16px rgba(14,165,233,.4);}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* 기타 */
+.matchCard{background:#fff;border-radius:12px;padding:12px;margin-bottom:8px;border:1.5px solid #e0f2fe;}
+.teamScore{background:#f8fafc;border-radius:8px;padding:14px;margin-bottom:12px;border:1.5px solid #e2e8f0;}
+.playerName{color:#0f172a;font-weight:600;}
+.ruleBox{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:10px;padding:12px;margin-bottom:10px;color:#0f172a;line-height:1.6;}
+
 .divider{border:none;border-top:1.5px solid #f1f5f9;margin:10px 0;}
 .empty{text-align:center;color:#94a3b8;padding:36px 0;font-size:13px;}
 .errBox{background:#fee2e2;border:1.5px solid #fca5a5;border-radius:10px;padding:10px;color:#dc2626;font-size:13px;margin-bottom:10px;}
@@ -192,9 +176,6 @@ select option{background:#fff;color:#1e293b;}
 <script>
 'use strict';
 
-// ════════════════════════════════════════════════════════════
-// 설정 및 Firebase
-// ════════════════════════════════════════════════════════════
 var DIVS = ['1부','2부','3부','4부','5부','6부','7부'];
 var POSITIONS = ['일반회원','회장','부회장','감사','총무','진행이사','홍보이사'];
 
@@ -209,13 +190,9 @@ const firebaseConfig = {
   measurementId: "G-YJBV5QW26G"
 };
 
-// Firebase 초기화
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
-// ════════════════════════════════════════════════════════════
-// 유틸
-// ════════════════════════════════════════════════════════════
 function uid(){ return Math.random().toString(36).substr(2,9); }
 function today(){
   var d = new Date();
@@ -236,9 +213,6 @@ function showToast(msg, isErr){
   setTimeout(function(){ t.classList.remove('show'); }, 2500);
 }
 
-// ════════════════════════════════════════════════════════════
-// DB 
-// ════════════════════════════════════════════════════════════
 var DB = null;
 var saveTimer = null;
 var isSaving = false;
@@ -303,9 +277,6 @@ function reloadFromGithub(onDone){
 
 function autoBackupIfNeeded(){ }
 
-// ════════════════════════════════════════════════════════════
-// 인증
-// ════════════════════════════════════════════════════════════
 var authLv = 0;
 try { authLv = parseInt(sessionStorage.getItem('htAuth')||'0'); } catch(e){}
 
@@ -361,9 +332,6 @@ function doLogout(){
   document.getElementById('loginErr').style.display = 'none';
 }
 
-// ════════════════════════════════════════════════════════════
-// 앱 상태
-// ════════════════════════════════════════════════════════════
 var S = {
   tab: 'dashboard',
   mSearch: '', mSort: 'division', mForm: false, mEditId: null,
@@ -374,9 +342,6 @@ var S = {
   visitDate: today()
 };
 
-// ════════════════════════════════════════════════════════════
-// 탭 설정
-// ════════════════════════════════════════════════════════════
 var TABS = [
   { id:'dashboard', icon:'🏓', label:'대시보드' },
   { id:'members',   icon:'🎽', label:'회원명부' },
@@ -409,9 +374,6 @@ function buildTabBar(){
   });
 }
 
-// ════════════════════════════════════════════════════════════
-// 렌더
-// ════════════════════════════════════════════════════════════
 function render(){
   buildTabBar();
   updateAuthBadge();
@@ -433,9 +395,6 @@ function render(){
   if(fns[S.tab]) pg.appendChild(fns[S.tab]());
 }
 
-// ════════════════════════════════════════════════════════════
-// HTML 빌더 헬퍼
-// ════════════════════════════════════════════════════════════
 function h(tag, attrs, inner){
   var e = document.createElement(tag);
   if(attrs){
@@ -496,9 +455,6 @@ function warnBox(msg){ var d=div('warnBox'); d.innerHTML=msg; return d; }
 function errBox(msg){ var d=div('errBox'); d.textContent=msg; return d; }
 function memberName(id){ var m=DB.members.find(function(x){return x.id===id;}); return m?m.name:'?'; }
 
-// ════════════════════════════════════════════════════════════
-// 대시보드
-// ════════════════════════════════════════════════════════════
 function pgDash(){
   var f = frag();
   var td = today(), tm = thisMonth();
@@ -518,7 +474,6 @@ function pgDash(){
   var top5 = DB.members.slice().sort(function(a,b){ return b.cumulativePoints-a.cumulativePoints; }).slice(0,5);
   var upcoming = DB.meetings.filter(function(m){ return m.status==='scheduled'; }).sort(function(a,b){ return a.date.localeCompare(b.date); });
 
-  // 통계
   var sg = div('statGrid');
   [['👥','전체 회원',DB.members.length+'명','#10b981','#10b98133'],
    ['📍','오늘 오프라인',(att.offline||[]).length+'명','#f59e0b','#f59e0b33'],
@@ -533,7 +488,6 @@ function pgDash(){
   });
   f.appendChild(sg);
 
-  // 부수별
   var dc2 = card('부수별 현황','');
   var divRow = div('','display:flex;gap:5px');
   DIVS.forEach(function(d){
@@ -544,7 +498,6 @@ function pgDash(){
   });
   dc2.appendChild(divRow); f.appendChild(dc2);
 
-  // TOP5
   var t5c = card('🏆 승점 TOP 5','');
   if(!top5.length){
     t5c.appendChild(div('empty')); t5c.lastChild.textContent='회원 데이터가 없습니다.';
@@ -561,7 +514,6 @@ function pgDash(){
   }
   f.appendChild(t5c);
 
-  // 이달 출석률 TOP5
   var attStats = {};
   DB.members.forEach(function(m){ attStats[m.id]=0; });
   var attDays = 0;
@@ -590,7 +542,6 @@ function pgDash(){
     f.appendChild(atc);
   }
 
-  // 다음 월례회
   if(upcoming.length){
     var uc = card('📋 다음 월례회','');
     var row = div('row');
@@ -602,13 +553,9 @@ function pgDash(){
   return f;
 }
 
-// ════════════════════════════════════════════════════════════
-// 회원명부
-// ════════════════════════════════════════════════════════════
 function pgMembers(){
   var f = frag();
 
-  // 헤더
   var hrow = div('row','margin-bottom:10px');
   var ht = div('','font-weight:800;font-size:15px');
   ht.innerHTML='회원명부 <span style="color:#64748b;font-size:12px;font-weight:400">'+DB.members.length+'명</span>';
@@ -620,12 +567,10 @@ function pgMembers(){
   }
   f.appendChild(hrow);
 
-  // 검색
   var si = h('input',{placeholder:'🔍 이름 검색...', value:S.mSearch, oninput:function(e){S.mSearch=e.target.value;render();}});
   si.style.marginBottom='8px';
   f.appendChild(si);
 
-  // 정렬
   var sb = div('','display:flex;gap:5px;margin-bottom:10px');
   [['division','부수순'],['points','승점순'],['name','이름순']].forEach(function(v){
     var b = document.createElement('button');
@@ -640,7 +585,6 @@ function pgMembers(){
   });
   f.appendChild(sb);
 
-  // 추가/수정 폼
   if(S.mForm && canEdit()){
     var em = S.mEditId ? DB.members.find(function(m){return m.id===S.mEditId;}) : null;
     var fd = {
@@ -676,7 +620,6 @@ function pgMembers(){
     var pg2 = div('fGroup'); ap(pg2, h('label',{cls:'fLabel'},'누적 승점'), pi);
     if(S.mEditId){ var note=div('','font-size:11px;color:#f59e0b;margin-top:3px'); note.textContent='⚠️ 부수 변경 시 누적 승점 0으로 초기화'; pg2.appendChild(note); }
 
-    // 직책
     var ps = document.createElement('select');
     POSITIONS.forEach(function(v){
       var o=document.createElement('option'); o.value=v; o.textContent=v;
@@ -706,7 +649,6 @@ function pgMembers(){
     ap(brow, saveB, cancelB); fc.appendChild(brow); f.appendChild(fc);
   }
 
-  // 목록
   var list = DB.members.filter(function(m){ return m.name.indexOf(S.mSearch)>=0; });
   if(S.mSort==='division') list.sort(function(a,b){ return DIVS.indexOf(a.division)-DIVS.indexOf(b.division)||b.cumulativePoints-a.cumulativePoints; });
   else if(S.mSort==='points') list.sort(function(a,b){ return b.cumulativePoints-a.cumulativePoints; });
@@ -740,9 +682,6 @@ function pgMembers(){
   return f;
 }
 
-// ════════════════════════════════════════════════════════════
-// 출석부
-// ════════════════════════════════════════════════════════════
 function pgAtt(){
   var f = frag();
 
@@ -780,7 +719,6 @@ function pgAtt(){
     f.appendChild(mc); return f;
   }
 
-  // 일별
   var tr2 = div('row','margin-bottom:12px');
   var di = h('input',{type:'date', value:S.aDate, onchange:function(e){S.aDate=e.target.value;render();}}); di.style.width='auto';
   ap(tr2, di, btn('bGray bSm','월별 통계',function(){S.aView='month';render();}));
@@ -836,9 +774,6 @@ function pgAtt(){
   return f;
 }
 
-// ════════════════════════════════════════════════════════════
-// 월례회
-// ════════════════════════════════════════════════════════════
 function pgMeetings(){
   if(S.mtView==='create') return pgMeetCreate();
   if(S.mtView==='detail') return pgMeetDetail();
@@ -970,14 +905,39 @@ function tabParts(mt){
   var c = card('참가자 선택', mt.participants.length+'명 선택됨');
   var n = mt.participants.length;
 
+  var ruleBox = div('ruleBox');
+  ruleBox.innerHTML = '<div style="font-weight:700;margin-bottom:6px;color:#0ea5e9">📋 월례회 운영 규정</div>';
+  
   if(mt.type==='team'){
-    if(n<=5) c.appendChild(warnBox('⚠️ 5명 이하: 친선 경기로 진행됩니다.'));
-    else if(n<=11) c.appendChild(infoBox('✅ '+n+'명 - 1복식 + '+(n-2)+'단식'));
-    else c.appendChild(infoBox('✅ '+n+'명 - 2복식 + '+(n-4)+'단식'));
+    if(n<=5){
+      ruleBox.innerHTML += '<div style="font-size:12px">⚠️ <strong>5명 이하:</strong> 친선전 (승강제 미적용)</div>';
+    } else if(n<=11){
+      ruleBox.innerHTML += '<div style="font-size:12px">✅ <strong>6~11명:</strong> 복식 1경기 + 단식 '+(n-2)+'경기<br>'
+        +'• 승리팀 전원 +3점<br>'
+        +'• 1등/2등 시상<br>'
+        +'• 꼴찌 1명 강등</div>';
+    } else {
+      ruleBox.innerHTML += '<div style="font-size:12px">✅ <strong>12명 이상:</strong> 복식 2경기 + 단식 '+(n-4)+'경기<br>'
+        +'• 승리팀 전원 +3점<br>'
+        +'• 1등/2등 시상<br>'
+        +'• 꼴찌 1~2등 2명 강등</div>';
+    }
   } else if(mt.type==='individual'){
-    if(n<=5) c.appendChild(warnBox('⚠️ 5명 이하: 친선 경기로 진행됩니다.'));
-    else c.appendChild(infoBox('✅ '+n+'명 - 총 '+(n*(n-1)/2)+'경기 (풀 라운드로빈)'));
+    if(n<=5){
+      ruleBox.innerHTML += '<div style="font-size:12px">⚠️ <strong>5명 이하:</strong> 친선전 (승강제 미적용)</div>';
+    } else if(n<=11){
+      ruleBox.innerHTML += '<div style="font-size:12px">✅ <strong>6~11명 개인전:</strong><br>'
+        +'• 1등 10점 / 2등 5점 시상<br>'
+        +'• 꼴찌 1명 강등<br>'
+        +'• 전체 '+n+'명 풀 라운드로빈 ('+(n*(n-1)/2)+'경기)</div>';
+    } else {
+      ruleBox.innerHTML += '<div style="font-size:12px">✅ <strong>12명 이상 개인전:</strong><br>'
+        +'• 1등 10점 / 2등 5점 / 3등 3점 시상<br>'
+        +'• 꼴찌 1~2등 2명 강등<br>'
+        +'• 전체 '+n+'명 풀 라운드로빈 ('+(n*(n-1)/2)+'경기)</div>';
+    }
   }
+  c.appendChild(ruleBox);
 
   var chips = div('','display:flex;flex-wrap:wrap;margin-bottom:10px');
   DB.members.forEach(function(m){
@@ -1074,15 +1034,17 @@ function tabTeamMatches(mt){
   var totalA=0, totalB=0;
   mt.matches.forEach(function(m){ if(m.played){totalA+=m.setsA;totalB+=m.setsB;} });
 
-  var tot = div('','display:flex;justify-content:center;align-items:center;gap:20px;background:#0a0f1a;border-radius:8px;padding:10px;margin-bottom:12px');
-  tot.innerHTML='<div style="text-align:center"><div style="font-size:24px;font-weight:900;color:#3b82f6">'+totalA+'</div><div style="font-size:11px;color:#64748b">A팀</div></div>'
-    +'<div style="font-size:18px;color:#475569;font-weight:700">:</div>'
-    +'<div style="text-align:center"><div style="font-size:24px;font-weight:900;color:#f59e0b">'+totalB+'</div><div style="font-size:11px;color:#64748b">B팀</div></div>';
+  var tot = div('teamScore');
+  tot.innerHTML='<div style="display:flex;justify-content:center;align-items:center;gap:20px">'
+    +'<div style="text-align:center"><div style="font-size:28px;font-weight:900;color:#3b82f6">'+totalA+'</div><div style="font-size:12px;color:#64748b;margin-top:4px">A팀</div></div>'
+    +'<div style="font-size:20px;color:#94a3b8;font-weight:700">:</div>'
+    +'<div style="text-align:center"><div style="font-size:28px;font-weight:900;color:#f59e0b">'+totalB+'</div><div style="font-size:12px;color:#64748b;margin-top:4px">B팀</div></div>'
+    +'</div>';
   c.appendChild(tot);
 
   var canS = canScore(mt.date);
   mt.matches.forEach(function(match, idx){
-    var mc = card(null,null); mc.style.marginBottom='8px';
+    var mc = div('matchCard');
     var isDbl = match.matchType==='doubles';
     var aNames = match.aPlayers.map(memberName).join('/');
     var bNames = match.bPlayers.map(memberName).join('/');
@@ -1094,8 +1056,8 @@ function tabTeamMatches(mt){
     mc.appendChild(mhdr);
 
     var row = div('row','gap:6px');
-    var an = div('flex1'); an.innerHTML='<span class="tagA">A</span> <span style="font-weight:600;font-size:13px">'+aNames+'</span>';
-    var bn = div('','flex:1;text-align:right'); bn.innerHTML='<span style="font-weight:600;font-size:13px">'+bNames+'</span> <span class="tagB">B</span>';
+    var an = div('flex1'); an.innerHTML='<span class="tagA">A</span> <span class="playerName">'+aNames+'</span>';
+    var bn = div('','flex:1;text-align:right'); bn.innerHTML='<span class="playerName">'+bNames+'</span> <span class="tagB">B</span>';
 
     var scoreWr = div('row','gap:4px;flex-shrink:0');
     if(canS){
@@ -1103,10 +1065,9 @@ function tabTeamMatches(mt){
         var saD = div('scoreNum'); saD.textContent=m2.setsA;
         var sbD = div('scoreNum'); sbD.textContent=m2.setsB;
         var sep = div('','color:#64748b;font-weight:700'); sep.textContent=':';
-        var maB=document.createElement('button'); maB.className='pmBtn'; maB.style.background='#1e2d44'; maB.textContent='−'; maB.onclick=function(){m2.setsA=Math.max(0,m2.setsA-1);saD.textContent=m2.setsA;saveDB(false);};
-        maB.textContent='−';
+        var maB=document.createElement('button'); maB.className='pmBtn'; maB.style.background='#cbd5e1'; maB.textContent='−'; maB.onclick=function(){m2.setsA=Math.max(0,m2.setsA-1);saD.textContent=m2.setsA;saveDB(false);};
         var paB=document.createElement('button'); paB.className='pmBtn'; paB.style.background='#3b82f6'; paB.textContent='+'; paB.onclick=function(){m2.setsA=Math.min(3,m2.setsA+1);saD.textContent=m2.setsA;saveDB(false);};
-        var mbB=document.createElement('button'); mbB.className='pmBtn'; mbB.style.background='#1e2d44'; mbB.textContent='−'; mbB.onclick=function(){m2.setsB=Math.max(0,m2.setsB-1);sbD.textContent=m2.setsB;saveDB(false);};
+        var mbB=document.createElement('button'); mbB.className='pmBtn'; mbB.style.background='#cbd5e1'; mbB.textContent='−'; mbB.onclick=function(){m2.setsB=Math.max(0,m2.setsB-1);sbD.textContent=m2.setsB;saveDB(false);};
         var pbB=document.createElement('button'); pbB.className='pmBtn'; pbB.style.background='#f59e0b'; pbB.textContent='+'; pbB.onclick=function(){m2.setsB=Math.min(3,m2.setsB+1);sbD.textContent=m2.setsB;saveDB(false);};
         ap(scoreWr, maB, saD, paB, sep, mbB, sbD, pbB);
         ap(row, an, scoreWr, bn); mc.appendChild(row);
@@ -1133,7 +1094,7 @@ function tabIndivMatches(mt){
   mt.rrMatches.forEach(function(match){
     var p1 = DB.members.find(function(m){return m.id===match.p1;});
     var p2 = DB.members.find(function(m){return m.id===match.p2;});
-    var mc = card(null,null); mc.style.marginBottom='7px';
+    var mc = div('matchCard');
     var mhdr = div('row','margin-bottom:6px;justify-content:space-between;flex-wrap:wrap;gap:4px');
     var nm = div('','font-weight:700;font-size:13px'); nm.textContent=(p1?p1.name:'?')+' vs '+(p2?p2.name:'?');
     mhdr.appendChild(nm);
@@ -1146,7 +1107,7 @@ function tabIndivMatches(mt){
       var rbtns = div('','display:flex;flex-wrap:wrap;gap:4px');
       [[2,0],[2,1],[1,2],[0,2]].forEach(function(sc){
         var rb = document.createElement('button');
-        rb.style.cssText='padding:5px 8px;border:1px solid #2a3444;border-radius:6px;cursor:pointer;font-size:11px;font-weight:600;background:#1e2d44;color:#94a3b8;font-family:inherit';
+        rb.style.cssText='padding:5px 8px;border:1px solid #cbd5e1;border-radius:6px;cursor:pointer;font-size:11px;font-weight:600;background:#f0f9ff;color:#0f172a;font-family:inherit';
         rb.textContent=(p1?p1.name:'?')+' '+sc[0]+':'+sc[1]+' '+(p2?p2.name:'?');
         (function(s1,s2){
           rb.onclick=function(){ match.sets1=s1; match.sets2=s2; match.played=true; saveDB(); render(); showToast('결과 저장됨'); };
@@ -1251,10 +1212,12 @@ function tabResult(mt){
   if(mt.type==='team'){
     var totalA=0,totalB=0;
     mt.matches.forEach(function(m){if(m.played){totalA+=m.setsA;totalB+=m.setsB;}});
-    var tot=div('','display:flex;justify-content:center;align-items:center;gap:20px;background:#0a0f1a;border-radius:8px;padding:14px;margin-bottom:12px');
-    tot.innerHTML='<div style="text-align:center"><div style="font-size:28px;font-weight:900;color:#3b82f6">'+totalA+'</div><div style="font-size:11px;color:#64748b">A팀 세트</div></div>'
-      +'<div style="font-size:20px;color:#475569;font-weight:700">:</div>'
-      +'<div style="text-align:center"><div style="font-size:28px;font-weight:900;color:#f59e0b">'+totalB+'</div><div style="font-size:11px;color:#64748b">B팀 세트</div></div>';
+    var tot=div('teamScore');
+    tot.innerHTML='<div style="display:flex;justify-content:center;align-items:center;gap:20px">'
+      +'<div style="text-align:center"><div style="font-size:28px;font-weight:900;color:#3b82f6">'+totalA+'</div><div style="font-size:12px;color:#64748b">A팀 세트</div></div>'
+      +'<div style="font-size:20px;color:#94a3b8;font-weight:700">:</div>'
+      +'<div style="text-align:center"><div style="font-size:28px;font-weight:900;color:#f59e0b">'+totalB+'</div><div style="font-size:12px;color:#64748b">B팀 세트</div></div>'
+      +'</div>';
     c.appendChild(tot);
 
     if(totalA===totalB){
@@ -1304,7 +1267,7 @@ function tabResult(mt){
       if(n2<=11){
         if(ranked2[0]) awards[ranked2[0].memberId]={pts:10,label:'🥇 1등'};
         if(ranked2[1]) awards[ranked2[1].memberId]={pts:5,label:'🥈 2등'};
-        if(ranked2[ranked2.length-1]) awards[ranked2[ranked2.length-1].memberId]={pts:0,label:'꼴찌',rel:false};
+        if(ranked2[ranked2.length-1]) awards[ranked2[ranked2.length-1].memberId]={pts:0,label:'꼴찌',rel:true};
       } else {
         if(ranked2[0]) awards[ranked2[0].memberId]={pts:10,label:'🥇 1등'};
         if(ranked2[1]) awards[ranked2[1].memberId]={pts:5,label:'🥈 2등'};
@@ -1371,7 +1334,7 @@ function renderDone(mt){
     var wTeam=mt.winner==='A'?mt.teamA:(mt.participants||[]).filter(function(id){return(mt.teamA||[]).indexOf(id)<0;});
     wTeam.forEach(function(id){
       var m=DB.members.find(function(x){return x.id===id;}); if(!m) return;
-      var row=div('row','padding:6px 0;border-bottom:1px solid #1e2d44');
+      var row=div('row','padding:6px 0;border-bottom:1px solid #e0f2fe');
       ap(row,avt(m)); var nm=div('flex1'); nm.textContent=m.name; var pts=div('','color:#10b981;font-size:12px'); pts.textContent='+3점';
       ap(row,nm,pts); c.appendChild(row);
     });
@@ -1394,9 +1357,6 @@ function renderDone(mt){
   return f;
 }
 
-// ════════════════════════════════════════════════════════════
-// 조직도
-// ════════════════════════════════════════════════════════════
 function pgOrg(){
   var f=frag();
   var ROLE_ORDER=['회장','부회장','감사','총무','진행이사','홍보이사'];
@@ -1489,9 +1449,6 @@ function pgOrg(){
   return f;
 }
 
-// ════════════════════════════════════════════════════════════
-// 부수관리
-// ════════════════════════════════════════════════════════════
 function pgDiv(){
   var f=frag();
   DIVS.forEach(function(dv){
@@ -1499,12 +1456,12 @@ function pgDiv(){
     if(!dm.length) return;
     var c=card(dv,dm.length+'명');
     dm.forEach(function(m,i){
-      var row=div('row','padding:8px 0;'+(i<dm.length-1?'border-bottom:1px solid #1e2d44':''));
+      var row=div('row','padding:8px 0;'+(i<dm.length-1?'border-bottom:1px solid #e0f2fe':''));
       var info=div('flex1'); info.innerHTML='<span style="font-weight:600">'+m.name+'</span> <span style="font-size:10px;color:#64748b">'+m.gender+' · '+m.cumulativePoints+'점</span>';
       row.appendChild(info);
       if(canEdit()){
         var ds=document.createElement('select');
-        ds.style.cssText='background:#0a0f1a;border:1px solid #2a3444;color:#e2e8f0;padding:4px 7px;border-radius:6px;font-size:12px;cursor:pointer;width:auto;font-family:inherit';
+        ds.style.cssText='background:#fff;border:1.5px solid #cbd5e1;color:#1e293b;padding:4px 7px;border-radius:6px;font-size:12px;cursor:pointer;width:auto;font-family:inherit';
         DIVS.forEach(function(d){ var o=document.createElement('option'); o.value=d; o.textContent=d; if(d===m.division) o.selected=true; ds.appendChild(o); });
         (function(mem){
           ds.onchange=function(e){
@@ -1524,9 +1481,6 @@ function pgDiv(){
   return f;
 }
 
-// ════════════════════════════════════════════════════════════
-// 게시판
-// ════════════════════════════════════════════════════════════
 function pgBoard(){
   var f=frag();
   var hrow=div('row','margin-bottom:10px');
@@ -1583,7 +1537,7 @@ function pgBoardWrite(){
   var fc=card(null,null);
   var tg=div('fGroup'); var ti=h('input',{placeholder:'제목을 입력하세요',oninput:function(e){fd.title=e.target.value;}}); ap(tg,h('label',{cls:'fLabel'},'제목'),ti);
   var cg=div('fGroup'); var ci=document.createElement('textarea');
-  ci.placeholder='내용을 입력하세요'; ci.style.cssText='width:100%;background:#0a0f1a;border:1px solid #2a3444;border-radius:8px;color:#e2e8f0;padding:9px 11px;font-size:14px;font-family:inherit;min-height:120px;resize:vertical;line-height:1.6';
+  ci.placeholder='내용을 입력하세요'; ci.style.cssText='width:100%;background:#fff;border:1.5px solid #cbd5e1;border-radius:8px;color:#1e293b;padding:9px 11px;font-size:14px;font-family:inherit;min-height:120px;resize:vertical;line-height:1.6';
   ci.oninput=function(e){fd.content=e.target.value;};
   ap(cg,h('label',{cls:'fLabel'},'내용'),ci);
   ap(fc,tg,cg);
@@ -1636,19 +1590,19 @@ function pgBoardDetail(){
   var titleEl=div('','font-weight:800;font-size:16px;margin-bottom:8px');
   titleEl.textContent=(post.pinned?'📌 ':'')+post.title;
   c.appendChild(titleEl);
-  var meta=div('','font-size:11px;color:#475569;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #1e2d44');
+  var meta=div('','font-size:11px;color:#475569;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #e0f2fe');
   meta.innerHTML='👤 '+escHtml(post.authorName)+' &nbsp; 📅 '+post.createdAt.substr(0,10);
   c.appendChild(meta);
-  var body=div('','font-size:14px;color:#e2e8f0;line-height:1.8;white-space:pre-wrap');
+  var body=div('','font-size:14px;color:#0f172a;line-height:1.8;white-space:pre-wrap');
   body.textContent=post.content;
   c.appendChild(body); f.appendChild(c);
 
   var cc=card('💬 댓글 '+(post.comments||[]).length+'개','');
   (post.comments||[]).forEach(function(cm){
-    var crow=div('','padding:8px 0;border-bottom:1px solid #1e2d44');
+    var crow=div('','padding:8px 0;border-bottom:1px solid #e0f2fe');
     var cmeta=div('','font-size:10px;color:#475569;margin-bottom:4px');
     cmeta.textContent=cm.authorName+' · '+cm.createdAt.substr(0,10);
-    var ctxt=div('','font-size:13px;color:#e2e8f0;line-height:1.6');
+    var ctxt=div('','font-size:13px;color:#0f172a;line-height:1.6');
     ctxt.textContent=cm.content;
     crow.appendChild(cmeta); crow.appendChild(ctxt);
     if(canEdit()){
@@ -1663,7 +1617,7 @@ function pgBoardDetail(){
 
   if(authLv>=1){
     var cinput=document.createElement('textarea');
-    cinput.placeholder='댓글을 입력하세요'; cinput.style.cssText='width:100%;background:#0a0f1a;border:1px solid #2a3444;border-radius:8px;color:#e2e8f0;padding:9px 11px;font-size:13px;font-family:inherit;min-height:70px;resize:none;margin-top:10px;line-height:1.6';
+    cinput.placeholder='댓글을 입력하세요'; cinput.style.cssText='width:100%;background:#fff;border:1.5px solid #cbd5e1;border-radius:8px;color:#1e293b;padding:9px 11px;font-size:13px;font-family:inherit;min-height:70px;resize:none;margin-top:10px;line-height:1.6';
     cc.appendChild(cinput);
     var csubB=btn('bGreen bBlock','댓글 등록',function(){
       var txt=cinput.value.trim(); if(!txt){showToast('댓글을 입력하세요.',true);return;}
@@ -1685,9 +1639,6 @@ function getCurrentMember(){
 
 function escHtml(str){ return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-// ════════════════════════════════════════════════════════════
-// 방문 예약
-// ════════════════════════════════════════════════════════════
 var VISIT_SLOTS = [
   '06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30',
   '10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30',
@@ -1873,9 +1824,6 @@ function pgVisit(){
   return f;
 }
 
-// ════════════════════════════════════════════════════════════
-// 설정 (관리자 전용)
-// ════════════════════════════════════════════════════════════
 function pgSettings(){
   if(!canEdit()){ var e=div('empty'); e.textContent='관리자만 접근 가능합니다.'; return e; }
   var f=frag();
@@ -1893,7 +1841,6 @@ function pgSettings(){
   bkc.appendChild(bkNote);
   f.appendChild(bkc);
 
-  // 비밀번호 변경
   var pc=card('🔑 비밀번호 관리','');
   var pwFields=[
     {key:'memberPw', label:'회원 공용 비번', ph:'새 비번 입력'},
@@ -1922,7 +1869,6 @@ function pgSettings(){
   }));
   f.appendChild(pc);
 
-  // 데이터 초기화
   var rc=card('⚠️ 데이터 관리','');
   var wb=div('warnBox'); wb.textContent='⚠️ 초기화 후 복구 불가능합니다. 신중하게 사용하세요.'; rc.appendChild(wb);
   var bg=div('','display:flex;gap:8px;flex-wrap:wrap');
@@ -1960,7 +1906,6 @@ function pgSettings(){
   return f;
 }
 
-// ── 앱 초기화 ────────────────────────────────────────────────
 window.onload = function(){
   var loadWrap  = document.getElementById('loadWrap');
   var loginWrap = document.getElementById('loginWrap');
