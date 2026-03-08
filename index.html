@@ -1365,12 +1365,6 @@ function pgOrg(){
     '진행이사':{grad:'#fce7f3,#fbcfe8',border:'#f472b6',text:'#9d174d',size:'sm'},
     '홍보이사':{grad:'#cffafe,#a5f3fc',border:'#22d3ee',text:'#0e7490',size:'sm'}
   };
-  var SIZES={
-    lg:{pad:'16px 20px',av:50,nm:15,rl:13,minW:'130px'},
-    md:{pad:'12px 16px',av:40,nm:14,rl:12,minW:'110px'},
-    sm:{pad:'10px 14px',av:34,nm:13,rl:11,minW:'95px'}
-  };
-
   var ht=div('','font-weight:800;font-size:15px;margin-bottom:16px;color:#0f172a');
   ht.textContent='🎖️ 조직도'; f.appendChild(ht);
 
@@ -1381,29 +1375,26 @@ function pgOrg(){
   });
 
   function makeCard(role){
-    var cfg=ROLE_CFG[role]; var sz=SIZES[cfg.size];
-    var col=div('','display:flex;flex-direction:column;gap:6px;align-items:center');
-    var members=roleMap[role];
+    var cfg=ROLE_CFG[role];
+    var members=roleMap[role].slice().sort(function(a,b){
+      return DIVS.indexOf(a.division)-DIVS.indexOf(b.division);
+    });
+    var c=div('','background:linear-gradient(135deg,'+cfg.grad+');border:2px solid '+cfg.border+';border-radius:12px;padding:9px 14px;text-align:center;min-width:80px;box-shadow:0 2px 8px rgba(0,0,0,.08)');
+    var rlEl=div('','font-size:12px;font-weight:800;color:'+cfg.text+';margin-bottom:5px;white-space:nowrap');
+    rlEl.textContent=role;
+    c.appendChild(rlEl);
     if(members.length===0){
-      var emp=div('','background:#f8fafc;border:2px dashed #cbd5e1;border-radius:14px;padding:'+sz.pad+';text-align:center;min-width:'+sz.minW+';');
-      emp.innerHTML='<div style="color:#94a3b8;font-size:12px">'+role+'</div><div style="color:#cbd5e1;font-size:10px;margin-top:2px">미지정</div>';
-      col.appendChild(emp);
+      var emp=div('','font-size:12px;color:#94a3b8');
+      emp.textContent='미지정';
+      c.appendChild(emp);
     } else {
       members.forEach(function(m){
-        var c=div('','background:linear-gradient(135deg,'+cfg.grad+');border:2px solid '+cfg.border+';border-radius:14px;padding:'+sz.pad+';text-align:center;min-width:'+sz.minW+';box-shadow:0 3px 10px rgba(0,0,0,.1)');
-        var avEl=div('','width:'+sz.av+'px;height:'+sz.av+'px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:'+(sz.av*0.38|0)+'px;margin:0 auto '+(sz.av*0.16|0)+'px;border:2.5px solid '+cfg.border+';background:rgba(255,255,255,.6);color:'+cfg.text);
-        avEl.textContent=m.name.charAt(0);
-        var nmEl=div('','font-weight:900;font-size:'+sz.nm+'px;color:#111827;white-space:nowrap');
-        nmEl.textContent=m.name;
-        var rlEl=div('','font-size:'+sz.rl+'px;font-weight:700;color:'+cfg.text+';margin-top:3px;white-space:nowrap');
-        rlEl.textContent=role;
-        var dvEl=div('','font-size:10px;color:#475569;margin-top:2px');
-        dvEl.textContent=m.division;
-        ap(c,avEl,nmEl,rlEl,dvEl);
-        col.appendChild(c);
+        var nmEl=div('','font-size:13px;font-weight:700;color:#0f172a;white-space:nowrap;line-height:1.6');
+        nmEl.textContent=m.name+'('+m.division+')';
+        c.appendChild(nmEl);
       });
     }
-    return col;
+    return c;
   }
 
   function connector(){
@@ -1412,16 +1403,16 @@ function pgOrg(){
     return l;
   }
 
-  var r1=div('','display:flex;justify-content:center;margin-bottom:4px');
+  var r1=div('','display:flex;justify-content:center;margin-bottom:6px');
   r1.appendChild(makeCard('회장')); f.appendChild(r1);
   f.appendChild(connector());
 
-  var r2=div('','display:flex;justify-content:center;gap:12px;margin-bottom:4px');
+  var r2=div('','display:flex;justify-content:center;gap:10px;margin-bottom:6px');
   ['부회장','감사'].forEach(function(role){r2.appendChild(makeCard(role));});
   f.appendChild(r2);
   f.appendChild(connector());
 
-  var r3=div('','display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:14px');
+  var r3=div('','display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:14px');
   ['총무','진행이사','홍보이사'].forEach(function(role){r3.appendChild(makeCard(role));});
   f.appendChild(r3);
 
