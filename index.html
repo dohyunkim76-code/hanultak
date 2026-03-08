@@ -32,10 +32,12 @@ select option{background:#fff;color:#1e293b;}
 .ab-temp{background:rgba(255,255,255,.2);color:#fef9c3;}
 .ab-member{background:rgba(255,255,255,.2);color:#fff;}
 
-#tabBar{display:flex;background:#fff;border-bottom:2px solid #e0f2fe;position:sticky;top:53px;z-index:99;box-shadow:0 2px 8px rgba(14,165,233,.1);}
-.tabBtn{flex:1;min-width:0;padding:7px 1px 5px;background:none;border:none;border-bottom:3px solid transparent;color:#94a3b8;cursor:pointer;font-size:10px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:1px;transition:all .15s;}
+#tabBar{display:flex;background:#fff;border-bottom:2px solid #e0f2fe;position:sticky;top:53px;z-index:99;box-shadow:0 2px 8px rgba(14,165,233,.1);overflow-x:auto;-webkit-overflow-scrolling:touch;}
+#tabBar::-webkit-scrollbar{height:3px;}
+#tabBar::-webkit-scrollbar-thumb{background:#bae6fd;border-radius:3px;}
+.tabBtn{flex:0 0 auto;min-width:58px;padding:8px 6px 6px;background:none;border:none;border-bottom:3px solid transparent;color:#94a3b8;cursor:pointer;font-size:12px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:2px;transition:all .15s;}
 .tabBtn.on{color:#0ea5e9;border-bottom-color:#0ea5e9;font-weight:900;}
-.tabIcon{font-size:15px;}
+.tabIcon{font-size:18px;}
 
 #page{padding:13px;max-width:640px;margin:0 auto;padding-bottom:50px;}
 
@@ -87,6 +89,21 @@ select option{background:#fff;color:#1e293b;}
 .chipOff{background:#f8fafc;color:#94a3b8;}
 .chipA{background:#dbeafe;color:#2563eb;border-color:#bfdbfe;}
 .chipB{background:#fef9c3;color:#d97706;border-color:#fde68a;}
+
+/* 투표 게시판 스타일 */
+.pollCard{background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;border:1.5px solid #e0f2fe;box-shadow:0 2px 8px rgba(14,165,233,.07);cursor:pointer;}
+.pollCard:hover{border-color:#0ea5e9;}
+.pollOption{border:2px solid #e0f2fe;border-radius:10px;padding:10px 12px;margin-bottom:8px;cursor:pointer;transition:all .2s;background:#f8fafc;}
+.pollOption:hover{border-color:#0ea5e9;background:#f0f9ff;}
+.pollOption.voted{border-color:#10b981;background:#d1fae5;}
+.pollOption.selected{border-color:#0ea5e9;background:#dbeafe;}
+.pollBar{height:8px;border-radius:6px;background:linear-gradient(90deg,#0ea5e9,#10b981);margin-top:5px;transition:width .4s;}
+.pollBarBg{height:8px;border-radius:6px;background:#e0f2fe;margin-top:5px;overflow:hidden;}
+.anonBadge{background:#ede9fe;color:#7c3aed;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;display:inline-block;}
+.namedBadge{background:#dbeafe;color:#2563eb;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;display:inline-block;}
+.closedBadge{background:#f1f5f9;color:#94a3b8;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;display:inline-block;}
+.activeBadge{background:#d1fae5;color:#059669;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;display:inline-block;}
+.voterTag{background:#f0f9ff;border:1px solid #bae6fd;border-radius:6px;padding:2px 7px;font-size:11px;color:#0369a1;margin:2px;display:inline-block;}
 
 .sbWrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
 .sbTable{border-collapse:collapse;font-size:11px;background:#fff;}
@@ -226,6 +243,7 @@ function _initDB(data){
   if(!DB.posts)      DB.posts      = [];
   if(!DB.visits)     DB.visits     = [];
   if(!DB.settings)   DB.settings   = {};
+  if(!DB.polls)      DB.polls      = [];
   // Firebase 빈 배열→null 변환 정규화: meetings의 필드 복구
   DB.meetings.forEach(function(mt){
     if(!mt.participants) mt.participants = [];
@@ -348,6 +366,7 @@ var S = {
   mtView: 'list', mtId: null, mtTab: 'parts',
   divSet: false,
   boardPostId: null,
+  voteId: null,
   visitDate: today()
 };
 
@@ -357,6 +376,7 @@ var TABS = [
   { id:'attendance',icon:'📋', label:'출석부' },
   { id:'meetings',  icon:'🥇', label:'월례회' },
   { id:'board',     icon:'📣', label:'게시판' },
+  { id:'vote',      icon:'🗳️', label:'투표' },
   { id:'visit',     icon:'🏸', label:'방문예약' },
   { id:'org',       icon:'🎖️', label:'조직도' },
   { id:'division',  icon:'⚡', label:'부수관리' },
@@ -368,7 +388,7 @@ function buildTabBar(){
   bar.innerHTML = '';
   TABS.forEach(function(t){
     var b = document.createElement('button');
-    var activeTab = S.tab.startsWith('board')?'board':S.tab;
+    var activeTab = S.tab.startsWith('board')?'board':S.tab.startsWith('vote')?'vote':S.tab;
     b.className = 'tabBtn' + (activeTab===t.id?' on':'');
     b.setAttribute('data-tab', t.id);
     if(t.id==='settings') b.style.display = authLv===3 ? 'flex' : 'none';
@@ -396,6 +416,9 @@ function render(){
     board:        pgBoard,
     board_write:  pgBoardWrite,
     board_detail: pgBoardDetail,
+    vote:         pgVote,
+    vote_write:   pgVoteWrite,
+    vote_detail:  pgVoteDetail,
     visit:        pgVisit,
     org:          pgOrg,
     division:     pgDiv,
@@ -1582,6 +1605,290 @@ function pgBoardDetail(){
   f.appendChild(cc);
   return f;
 }
+
+/* ===== 투표 게시판 ===== */
+
+function getVoterId(){
+  var me = getCurrentMember();
+  if(me) return me.id;
+  var n = localStorage.getItem('htName')||'';
+  return n ? 'guest_'+n : 'guest_'+Math.random().toString(36).substr(2,6);
+}
+
+function getVoterName(){
+  var me = getCurrentMember();
+  if(me) return me.name;
+  return localStorage.getItem('htName')||'회원';
+}
+
+function pgVote(){
+  var f=frag();
+  var hrow=div('row','margin-bottom:10px');
+  var ht=div('','font-weight:800;font-size:15px');
+  ht.innerHTML='투표 <span style="color:#64748b;font-size:12px;font-weight:400">'+(DB.polls||[]).length+'건</span>';
+  hrow.appendChild(ht);
+  if(authLv>=1){
+    hrow.appendChild(btn('bBlue bSm','🗳️ 투표 만들기',function(){S.tab='vote_write';render();}));
+  }
+  f.appendChild(hrow);
+
+  var polls=(DB.polls||[]).slice().sort(function(a,b){
+    if(a.status==='active'&&b.status!=='active') return -1;
+    if(a.status!=='active'&&b.status==='active') return 1;
+    return b.createdAt.localeCompare(a.createdAt);
+  });
+
+  if(!polls.length){
+    var e=div('empty'); e.textContent='등록된 투표가 없습니다.'; f.appendChild(e); return f;
+  }
+
+  var vid=getVoterId();
+  polls.forEach(function(poll){
+    var c=div('pollCard');
+    var head=div('row','margin-bottom:6px;flex-wrap:wrap;gap:4px');
+    var titleEl=div('flex1','');
+    titleEl.innerHTML='<span style="font-weight:700;font-size:14px">'+escHtml(poll.title)+'</span>';
+    head.appendChild(titleEl);
+    var badges=div('row','gap:4px;flex-shrink:0');
+    badges.appendChild(h('span',{},poll.anonymous?'<span class="anonBadge">무기명</span>':'<span class="namedBadge">기명</span>'));
+    badges.appendChild(h('span',{},poll.status==='active'?'<span class="activeBadge">진행중</span>':'<span class="closedBadge">종료</span>'));
+    head.appendChild(badges);
+    c.appendChild(head);
+
+    var totalVotes=(poll.votes||[]).length;
+    var preview=div('','font-size:12px;color:#64748b;margin-bottom:8px');
+    preview.textContent='선택지 '+(poll.options||[]).length+'개  ·  총 '+totalVotes+'표';
+    c.appendChild(preview);
+
+    var myVote=(poll.votes||[]).find(function(v){return v.voterId===vid;});
+    if(myVote){
+      var mv=div('','font-size:11px;color:#059669;font-weight:700;margin-bottom:4px');
+      mv.textContent='✅ 투표 완료 ('+escHtml(poll.options[myVote.optionIndex])+')';
+      c.appendChild(mv);
+    }
+
+    var meta=div('row','font-size:10px;color:#475569;gap:10px');
+    meta.innerHTML='<span>👤 '+escHtml(poll.authorName)+'</span>'
+      +'<span>📅 '+poll.createdAt.substr(0,10)+'</span>';
+    c.appendChild(meta);
+    (function(pid){c.onclick=function(){S.voteId=pid;S.tab='vote_detail';render();};})(poll.id);
+    f.appendChild(c);
+  });
+  return f;
+}
+
+function pgVoteWrite(){
+  var f=frag();
+  var tr=div('row','margin-bottom:14px');
+  tr.appendChild(h('button',{cls:'backBtn',onclick:function(){S.tab='vote';render();}},'←'));
+  var ht=div('','font-weight:800;font-size:15px'); ht.textContent='투표 만들기';
+  tr.appendChild(ht); f.appendChild(tr);
+
+  var fd={title:'',content:'',options:['',''],anonymous:false};
+  var fc=card(null,null);
+
+  /* 제목 */
+  var tg=div('fGroup');
+  var ti=h('input',{placeholder:'안건 제목을 입력하세요',oninput:function(e){fd.title=e.target.value;}});
+  ap(tg,h('label',{cls:'fLabel'},'제목 (안건)'),ti); fc.appendChild(tg);
+
+  /* 설명 */
+  var cg=div('fGroup');
+  var ci=document.createElement('textarea');
+  ci.placeholder='안건 설명을 입력하세요 (선택)';
+  ci.style.cssText='width:100%;background:#fff;border:1.5px solid #cbd5e1;border-radius:8px;color:#1e293b;padding:9px 11px;font-size:14px;font-family:inherit;min-height:80px;resize:vertical;line-height:1.6';
+  ci.oninput=function(e){fd.content=e.target.value;};
+  ap(cg,h('label',{cls:'fLabel'},'설명 (선택)'),ci); fc.appendChild(cg);
+
+  /* 기명/무기명 선택 */
+  var ag=div('fGroup');
+  ap(ag,h('label',{cls:'fLabel'},'투표 방식'));
+  var arow=div('row','gap:12px');
+  var rNamed=h('input',{type:'radio',value:'named'}); rNamed.name='voteType'; rNamed.style.width='auto';
+  rNamed.checked=true;
+  rNamed.onchange=function(){fd.anonymous=false;};
+  var lNamed=div('','font-size:13px;cursor:pointer;display:flex;align-items:center;gap:4px');
+  lNamed.appendChild(rNamed); lNamed.appendChild(document.createTextNode(' 🔵 기명 (이름 공개)'));
+  var rAnon=h('input',{type:'radio',value:'anonymous'}); rAnon.name='voteType'; rAnon.style.width='auto';
+  rAnon.onchange=function(){fd.anonymous=true;};
+  var lAnon=div('','font-size:13px;cursor:pointer;display:flex;align-items:center;gap:4px');
+  lAnon.appendChild(rAnon); lAnon.appendChild(document.createTextNode(' 🟣 무기명'));
+  ap(arow,lNamed,lAnon); ag.appendChild(arow); fc.appendChild(ag);
+
+  /* 선택지 */
+  var og=div('fGroup');
+  ap(og,h('label',{cls:'fLabel'},'선택지 (2~5개)'));
+  var optionContainer=div('','');
+  function renderOptions(){
+    optionContainer.innerHTML='';
+    fd.options.forEach(function(opt,i){
+      var orow=div('row','margin-bottom:6px;gap:6px');
+      var oi=h('input',{placeholder:'선택지 '+(i+1),value:opt,oninput:function(e){fd.options[i]=e.target.value;}});
+      var delBtn=null;
+      if(fd.options.length>2){
+        delBtn=bxs('bDark','✕',function(){fd.options.splice(i,1);renderOptions();});
+      }
+      orow.appendChild(oi);
+      if(delBtn) orow.appendChild(delBtn);
+      optionContainer.appendChild(orow);
+    });
+  }
+  renderOptions();
+  og.appendChild(optionContainer);
+  if(fd.options.length<5){
+    var addOptBtn=btn('bDark bSm','+ 선택지 추가',function(){
+      if(fd.options.length>=5){showToast('선택지는 최대 5개입니다.',true);return;}
+      fd.options.push(''); renderOptions(); og.removeChild(addOptBtn);
+      if(fd.options.length<5) og.appendChild(addOptBtn);
+    });
+    og.appendChild(addOptBtn);
+  }
+  fc.appendChild(og);
+
+  var brow=div('row','margin-top:12px;gap:8px');
+  var saveB=btn('bBlue','투표 등록',function(){
+    if(!fd.title.trim()){showToast('제목을 입력하세요.',true);return;}
+    var cleanOpts=fd.options.filter(function(o){return o.trim();});
+    if(cleanOpts.length<2){showToast('선택지를 2개 이상 입력하세요.',true);return;}
+    var me=getCurrentMember();
+    DB.polls=DB.polls||[];
+    DB.polls.push({
+      id:uid(),
+      title:fd.title.trim(),
+      content:fd.content.trim(),
+      options:cleanOpts,
+      anonymous:fd.anonymous,
+      authorId:me?me.id:'',
+      authorName:me?me.name:(localStorage.getItem('htName')||'회원'),
+      createdAt:new Date().toISOString(),
+      status:'active',
+      votes:[]
+    });
+    saveDB(true); S.tab='vote'; render(); showToast('투표가 등록되었습니다.');
+  });
+  var cancelB=btn('bGray','취소',function(){S.tab='vote';render();});
+  ap(brow,saveB,cancelB); fc.appendChild(brow); f.appendChild(fc);
+  return f;
+}
+
+function pgVoteDetail(){
+  var f=frag();
+  var poll=(DB.polls||[]).find(function(p){return p.id===S.voteId;});
+  if(!poll){S.tab='vote';render();return f;}
+
+  var tr=div('row','margin-bottom:14px');
+  tr.appendChild(h('button',{cls:'backBtn',onclick:function(){S.tab='vote';render();}},'←'));
+
+  if(canEdit()){
+    var closeB=btn('bDark bSm',poll.status==='active'?'투표 마감':'재개',function(){
+      poll.status=poll.status==='active'?'closed':'active';
+      saveDB(true); render();
+    });
+    closeB.style.marginLeft='auto';
+    var delB=btn('bRed bSm','삭제',function(){
+      if(!confirm('이 투표를 삭제하시겠습니까?')) return;
+      DB.polls=DB.polls.filter(function(p){return p.id!==S.voteId;});
+      saveDB(true); S.tab='vote'; render(); showToast('삭제되었습니다.');
+    });
+    tr.appendChild(closeB); tr.appendChild(delB);
+  }
+  f.appendChild(tr);
+
+  var c=card(null,null);
+  /* 제목/배지 */
+  var hrow=div('row','margin-bottom:6px;flex-wrap:wrap;gap:6px');
+  var titleEl=div('flex1','font-weight:800;font-size:16px');
+  titleEl.textContent=poll.title;
+  hrow.appendChild(titleEl);
+  var bdgRow=div('row','gap:4px');
+  bdgRow.innerHTML=(poll.anonymous?'<span class="anonBadge">무기명</span>':'<span class="namedBadge">기명</span>')
+    +(poll.status==='active'?'<span class="activeBadge">진행중</span>':'<span class="closedBadge">종료</span>');
+  hrow.appendChild(bdgRow);
+  c.appendChild(hrow);
+
+  var meta=div('','font-size:11px;color:#475569;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #e0f2fe');
+  meta.innerHTML='👤 '+escHtml(poll.authorName)+' &nbsp; 📅 '+poll.createdAt.substr(0,10);
+  c.appendChild(meta);
+
+  if(poll.content){
+    var bodyEl=div('','font-size:13px;color:#0f172a;line-height:1.8;white-space:pre-wrap;margin-bottom:14px;padding:10px;background:#f8fafc;border-radius:8px');
+    bodyEl.textContent=poll.content;
+    c.appendChild(bodyEl);
+  }
+
+  var vid=getVoterId();
+  var myVote=(poll.votes||[]).find(function(v){return v.voterId===vid;});
+  var totalVotes=(poll.votes||[]).length;
+
+  /* 선택지 목록 + 투표 */
+  var optLabel=div('','font-weight:700;font-size:13px;color:#0f172a;margin-bottom:8px');
+  optLabel.textContent='📋 선택지 (총 '+totalVotes+'표)';
+  c.appendChild(optLabel);
+
+  poll.options.forEach(function(opt,i){
+    var votesForOpt=(poll.votes||[]).filter(function(v){return v.optionIndex===i;});
+    var pct=totalVotes>0?Math.round(votesForOpt.length/totalVotes*100):0;
+    var isMyChoice=myVote&&myVote.optionIndex===i;
+    var ob=div('pollOption'+(isMyChoice?' voted':''));
+    var orow=div('row','margin-bottom:4px');
+    var optTxt=div('flex1','font-size:14px;font-weight:600;color:#0f172a');
+    optTxt.textContent=opt;
+    var cntEl=div('','font-size:12px;font-weight:700;color:'+(isMyChoice?'#059669':'#64748b'));
+    cntEl.textContent=votesForOpt.length+'표 ('+pct+'%)';
+    ap(orow,optTxt,cntEl); ob.appendChild(orow);
+
+    /* 진행바 */
+    var barBg=div('pollBarBg');
+    var barFill=div('pollBar'); barFill.style.width=pct+'%';
+    barBg.appendChild(barFill); ob.appendChild(barBg);
+
+    /* 기명이면 투표자 이름 표시 */
+    if(!poll.anonymous && votesForOpt.length>0){
+      var vnames=div('','margin-top:6px;');
+      votesForOpt.forEach(function(v){
+        var tag=document.createElement('span');
+        tag.className='voterTag';
+        tag.textContent=escHtml(v.voterName||'?');
+        vnames.appendChild(tag);
+      });
+      ob.appendChild(vnames);
+    }
+
+    /* 투표 가능 시 클릭 이벤트 */
+    if(authLv>=1 && poll.status==='active' && !myVote){
+      ob.classList.add('selected');
+      (function(idx){
+        ob.onclick=function(){
+          if(!confirm('"'+escHtml(opt)+'"에 투표하시겠습니까?')) return;
+          poll.votes=poll.votes||[];
+          var entry={voterId:vid, optionIndex:idx, createdAt:new Date().toISOString()};
+          if(!poll.anonymous) entry.voterName=getVoterName();
+          poll.votes.push(entry);
+          saveDB(true); render(); showToast('✅ 투표 완료!');
+        };
+      })(i);
+    } else {
+      ob.style.cursor='default';
+    }
+    c.appendChild(ob);
+  });
+
+  /* 이미 투표했으면 안내 */
+  if(myVote){
+    var doneEl=div('infoBox','margin-top:8px');
+    doneEl.textContent='✅ 이미 투표하셨습니다. (선택: '+escHtml(poll.options[myVote.optionIndex])+')';
+    c.appendChild(doneEl);
+  } else if(poll.status!=='active'){
+    var endEl=div('warnBox','margin-top:8px');
+    endEl.textContent='🔒 종료된 투표입니다.';
+    c.appendChild(endEl);
+  }
+
+  f.appendChild(c);
+  return f;
+}
+
+/* ===== 투표 게시판 끝 ===== */
 
 function getCurrentMember(){
   var n=localStorage.getItem('htName')||'';
