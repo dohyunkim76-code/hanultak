@@ -32,12 +32,10 @@ select option{background:#fff;color:#1e293b;}
 .ab-temp{background:rgba(255,255,255,.2);color:#fef9c3;}
 .ab-member{background:rgba(255,255,255,.2);color:#fff;}
 
-#tabBar{display:flex;background:#fff;border-bottom:2px solid #e0f2fe;position:sticky;top:53px;z-index:99;box-shadow:0 2px 8px rgba(14,165,233,.1);overflow-x:auto;-webkit-overflow-scrolling:touch;}
-#tabBar::-webkit-scrollbar{height:3px;}
-#tabBar::-webkit-scrollbar-thumb{background:#bae6fd;border-radius:3px;}
-.tabBtn{flex:0 0 auto;min-width:58px;padding:8px 6px 6px;background:none;border:none;border-bottom:3px solid transparent;color:#94a3b8;cursor:pointer;font-size:12px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:2px;transition:all .15s;}
+#tabBar{display:flex;background:#fff;border-bottom:2px solid #e0f2fe;position:sticky;top:53px;z-index:99;box-shadow:0 2px 8px rgba(14,165,233,.1);}
+.tabBtn{flex:1;min-width:0;padding:7px 2px 5px;background:none;border:none;border-bottom:3px solid transparent;color:#94a3b8;cursor:pointer;font-size:11px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:2px;transition:all .15s;line-height:1.2;}
 .tabBtn.on{color:#0ea5e9;border-bottom-color:#0ea5e9;font-weight:900;}
-.tabIcon{font-size:18px;}
+.tabIcon{font-size:17px;}
 
 #page{padding:13px;max-width:640px;margin:0 auto;padding-bottom:50px;}
 
@@ -69,7 +67,7 @@ select option{background:#fff;color:#1e293b;}
 .avtM{background:#dbeafe;border:2px solid #60a5fa;color:#2563eb;}
 .avtF{background:#fce7f3;border:2px solid #f472b6;color:#db2777;}
 
-.fLabel{display:block;font-size:10px;color:#64748b;margin-bottom:4px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;}
+.fLabel{display:block;font-size:12px;color:#64748b;margin-bottom:4px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;}
 .fGroup{margin-bottom:10px;}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;}
@@ -99,10 +97,10 @@ select option{background:#fff;color:#1e293b;}
 .pollOption.selected{border-color:#0ea5e9;background:#dbeafe;}
 .pollBar{height:8px;border-radius:6px;background:linear-gradient(90deg,#0ea5e9,#10b981);margin-top:5px;transition:width .4s;}
 .pollBarBg{height:8px;border-radius:6px;background:#e0f2fe;margin-top:5px;overflow:hidden;}
-.anonBadge{background:#ede9fe;color:#7c3aed;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;display:inline-block;}
-.namedBadge{background:#dbeafe;color:#2563eb;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;display:inline-block;}
-.closedBadge{background:#f1f5f9;color:#94a3b8;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;display:inline-block;}
-.activeBadge{background:#d1fae5;color:#059669;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;display:inline-block;}
+.anonBadge{background:#ede9fe;color:#7c3aed;font-size:11px;padding:2px 7px;border-radius:10px;font-weight:700;display:inline-block;}
+.namedBadge{background:#dbeafe;color:#2563eb;font-size:11px;padding:2px 7px;border-radius:10px;font-weight:700;display:inline-block;}
+.closedBadge{background:#f1f5f9;color:#94a3b8;font-size:11px;padding:2px 7px;border-radius:10px;font-weight:700;display:inline-block;}
+.activeBadge{background:#d1fae5;color:#059669;font-size:11px;padding:2px 7px;border-radius:10px;font-weight:700;display:inline-block;}
 .voterTag{background:#f0f9ff;border:1px solid #bae6fd;border-radius:6px;padding:2px 7px;font-size:11px;color:#0369a1;margin:2px;display:inline-block;}
 
 .sbWrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
@@ -144,8 +142,8 @@ select option{background:#fff;color:#1e293b;}
 .warnBox{background:#fef9c3;border:1.5px solid #fde68a;border-radius:10px;padding:10px;color:#d97706;font-size:12px;margin-bottom:10px;}
 .row{display:flex;align-items:center;gap:8px;}
 .flex1{flex:1;}
-.tagA{background:#dbeafe;color:#2563eb;font-size:10px;padding:2px 6px;border-radius:5px;font-weight:700;}
-.tagB{background:#fef9c3;color:#d97706;font-size:10px;padding:2px 6px;border-radius:5px;font-weight:700;}
+.tagA{background:#dbeafe;color:#2563eb;font-size:11px;padding:2px 6px;border-radius:5px;font-weight:700;}
+.tagB{background:#fef9c3;color:#d97706;font-size:11px;padding:2px 6px;border-radius:5px;font-weight:700;}
 </style>
 </head>
 <body>
@@ -367,20 +365,19 @@ var S = {
   divSet: false,
   boardPostId: null,
   voteId: null,
+  memberHubTab: 'members',
   visitDate: today()
 };
 
 var TABS = [
-  { id:'dashboard', icon:'🏓', label:'대시보드' },
-  { id:'members',   icon:'🎽', label:'회원명부' },
-  { id:'attendance',icon:'📋', label:'출석부' },
-  { id:'meetings',  icon:'🥇', label:'월례회' },
-  { id:'board',     icon:'📣', label:'게시판' },
-  { id:'vote',      icon:'🗳️', label:'투표' },
-  { id:'visit',     icon:'🏸', label:'방문예약' },
-  { id:'org',       icon:'🎖️', label:'조직도' },
-  { id:'division',  icon:'⚡', label:'부수관리' },
-  { id:'settings',  icon:'🔧', label:'설정' }
+  { id:'dashboard',   icon:'🏓', label:'대시보드' },
+  { id:'board',       icon:'📣', label:'게시판' },
+  { id:'attendance',  icon:'📋', label:'출석부' },
+  { id:'visit',       icon:'🏸', label:'방문예약' },
+  { id:'meetings',    icon:'🥇', label:'월례회' },
+  { id:'vote',        icon:'🗳️', label:'투표' },
+  { id:'members_hub', icon:'👥', label:'회원현황' },
+  { id:'settings',    icon:'🔧', label:'설정' }
 ];
 
 function buildTabBar(){
@@ -388,7 +385,7 @@ function buildTabBar(){
   bar.innerHTML = '';
   TABS.forEach(function(t){
     var b = document.createElement('button');
-    var activeTab = S.tab.startsWith('board')?'board':S.tab.startsWith('vote')?'vote':S.tab;
+    var activeTab = S.tab.startsWith('board')?'board':S.tab.startsWith('vote')?'vote':S.tab.startsWith('members')||S.tab==='org'||S.tab==='division'?'members_hub':S.tab;
     b.className = 'tabBtn' + (activeTab===t.id?' on':'');
     b.setAttribute('data-tab', t.id);
     if(t.id==='settings') b.style.display = authLv===3 ? 'flex' : 'none';
@@ -397,6 +394,7 @@ function buildTabBar(){
       S.tab = t.id;
       S.mtView = 'list';
       S.mForm = false;
+      if(t.id==='members_hub') { S.memberHubTab = S.memberHubTab||'members'; }
       render();
     });
     bar.appendChild(b);
@@ -420,8 +418,7 @@ function render(){
     vote_write:   pgVoteWrite,
     vote_detail:  pgVoteDetail,
     visit:        pgVisit,
-    org:          pgOrg,
-    division:     pgDiv,
+    members_hub:  pgMembersHub,
     settings:     pgSettings
   };
   if(fns[S.tab]) pg.appendChild(fns[S.tab]());
@@ -504,7 +501,6 @@ function pgDash(){
   DB.members.forEach(function(m){ dc[m.division] = (dc[m.division]||0)+1; });
 
   var top5 = DB.members.slice().sort(function(a,b){ return b.cumulativePoints-a.cumulativePoints; }).slice(0,5);
-  var upcoming = DB.meetings.filter(function(m){ return m.status==='scheduled'; }).sort(function(a,b){ return a.date.localeCompare(b.date); });
 
   var sg = div('statGrid');
   [['👥','전체 회원',DB.members.length+'명','#10b981','#10b98133'],
@@ -515,7 +511,7 @@ function pgDash(){
     var b = div('statBox','border:1px solid '+item[4]);
     b.innerHTML = '<div style="font-size:20px;margin-bottom:4px">'+item[0]+'</div>'
       +'<div style="font-size:18px;font-weight:900;color:'+item[3]+'">'+item[2]+'</div>'
-      +'<div style="font-size:10px;color:#64748b;margin-top:2px">'+item[1]+'</div>';
+      +'<div style="font-size:12px;color:#64748b;margin-top:2px">'+item[1]+'</div>';
     sg.appendChild(b);
   });
   f.appendChild(sg);
@@ -525,10 +521,45 @@ function pgDash(){
   DIVS.forEach(function(d){
     var b = div('','flex:1;background:#0a0f1a;border-radius:7px;padding:7px 4px;text-align:center');
     b.innerHTML = '<div style="font-size:16px;font-weight:900;color:#10b981">'+dc[d]+'</div>'
-      +'<div style="font-size:10px;color:#64748b;margin-top:1px">'+d+'</div>';
+      +'<div style="font-size:12px;color:#64748b;margin-top:1px">'+d+'</div>';
     divRow.appendChild(b);
   });
   dc2.appendChild(divRow); f.appendChild(dc2);
+
+  /* 월례회 공지 - 부수별 현황 바로 아래 */
+  var allMeetings = DB.meetings.slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+  var scheduledMtg = allMeetings.filter(function(m){ return m.status==='scheduled'; });
+  var recentDone   = DB.meetings.slice().sort(function(a,b){ return b.date.localeCompare(a.date); }).filter(function(m){ return m.status==='completed'; }).slice(0,1);
+  var mtgNotice = card('📋 월례회 현황','');
+  if(scheduledMtg.length){
+    scheduledMtg.slice(0,2).forEach(function(mt){
+      var mrow=div('row','padding:7px 0;border-bottom:1px solid #e0f2fe;gap:8px');
+      var info=div('flex1');
+      info.innerHTML='<div style="font-weight:700;font-size:14px;color:#0f172a">'+escHtml(mt.title)+'</div>'
+        +'<div style="font-size:12px;color:#64748b;margin-top:2px">📅 '+mt.date+' · 참가 '+(mt.participants||[]).length+'명</div>';
+      var badges=div('row','gap:4px;flex-shrink:0');
+      ap(badges, typeBdg(mt.type), bdg('Amber','예정'));
+      ap(mrow,info,badges);
+      mtgNotice.appendChild(mrow);
+    });
+  } else if(recentDone.length){
+    var mt2=recentDone[0];
+    var mrow2=div('row','padding:7px 0;gap:8px');
+    var info2=div('flex1');
+    info2.innerHTML='<div style="font-weight:700;font-size:14px;color:#64748b">'+escHtml(mt2.title)+'</div>'
+      +'<div style="font-size:12px;color:#94a3b8;margin-top:2px">📅 '+mt2.date+' (완료)</div>';
+    ap(mrow2,info2,bdg('Green','완료'));
+    mtgNotice.appendChild(mrow2);
+  } else {
+    var emptyMtg=div('','font-size:12px;color:#94a3b8;padding:8px 0;text-align:center');
+    emptyMtg.textContent='예정된 월례회가 없습니다.';
+    mtgNotice.appendChild(emptyMtg);
+  }
+  /* 월례회 탭으로 이동 버튼 */
+  var goMtg=btn('bDark bSm','월례회 바로가기',function(){S.tab='meetings';S.mtView='list';render();});
+  goMtg.style.cssText='margin-top:8px;font-size:11px;color:#0ea5e9;background:none;border:1px solid #bae6fd;border-radius:8px;padding:5px 10px;cursor:pointer;';
+  mtgNotice.appendChild(goMtg);
+  f.appendChild(mtgNotice);
 
   var t5c = card('🏆 승점 TOP 5','');
   if(!top5.length){
@@ -539,7 +570,7 @@ function pgDash(){
       var rc=['#fbbf24','#94a3b8','#cd7c3a','#475569','#475569'];
       var rn=div('','width:20px;font-weight:900;font-size:12px;color:'+rc[i]); rn.textContent=i+1;
       var av=avt(m); av.style.cssText='width:30px;height:30px;font-size:12px;margin-right:8px;';
-      var info=div('flex1'); info.innerHTML='<div style="font-weight:700;font-size:13px">'+m.name+'</div><div style="font-size:10px;color:#64748b">'+m.division+'</div>';
+      var info=div('flex1'); info.innerHTML='<div style="font-weight:700;font-size:14px">'+m.name+'</div><div style="font-size:12px;color:#64748b">'+m.division+'</div>';
       var pts=div('','font-weight:800;color:#10b981;font-size:12px'); pts.textContent=m.cumulativePoints+'점';
       ap(row,rn,av,info,pts); t5c.appendChild(row);
     });
@@ -565,7 +596,7 @@ function pgDash(){
       var rc2=['#fbbf24','#94a3b8','#cd7c3a','#475569','#475569'];
       var rn2=div('','width:20px;font-weight:900;font-size:12px;color:'+rc2[i]); rn2.textContent=i+1;
       var av2=avt(m); av2.style.cssText='width:28px;height:28px;font-size:11px;margin-right:6px';
-      var info2=div('flex1'); info2.innerHTML='<span style="font-weight:700">'+m.name+'</span> <span style="font-size:10px;color:#64748b">'+m.division+'</span>';
+      var info2=div('flex1'); info2.innerHTML='<span style="font-weight:700;font-size:14px">'+m.name+'</span> <span style="font-size:12px;color:#64748b">'+m.division+'</span>';
       var cnt2=div('','font-weight:800;color:#10b981;font-size:12px');
       var pct = attDays>0 ? Math.round((attStats[m.id]||0)/attDays*100) : 0;
       cnt2.textContent=(attStats[m.id]||0)+'회 ('+pct+'%)';
@@ -574,14 +605,6 @@ function pgDash(){
     f.appendChild(atc);
   }
 
-  if(upcoming.length){
-    var uc = card('📋 다음 월례회','');
-    var row = div('row');
-    var info = div('flex1'); info.innerHTML='<div style="font-weight:700">'+upcoming[0].title+'</div><div style="font-size:11px;color:#64748b">'+upcoming[0].date+'</div>';
-    var bdgs = div('row');
-    ap(bdgs, typeBdg(upcoming[0].type), bdg('Amber','예정'));
-    ap(row, info, bdgs); uc.appendChild(row); f.appendChild(uc);
-  }
   return f;
 }
 
@@ -691,8 +714,8 @@ function pgMembers(){
   list.forEach(function(m){
     var item = div('row','background:#fff;border-radius:12px;padding:11px 14px;border:1.5px solid #e0f2fe;margin-bottom:7px;box-shadow:0 1px 4px rgba(14,165,233,.07)');
     var info = div('flex1');
-    var posTag = (m.position&&m.position!=='일반회원') ? ' <span style="font-size:10px;background:#ede9fe;color:#7c3aed;padding:2px 6px;border-radius:5px;font-weight:700">'+m.position+'</span>' : '';
-    info.innerHTML='<div style="font-weight:700;color:#0f172a">'+m.name+posTag+' <span style="font-size:10px;color:#94a3b8">'+m.gender+'</span></div>'
+    var posTag = (m.position&&m.position!=='일반회원') ? ' <span style="font-size:11px;background:#ede9fe;color:#7c3aed;padding:2px 6px;border-radius:5px;font-weight:700">'+m.position+'</span>' : '';
+    info.innerHTML='<div style="font-weight:700;font-size:14px;color:#0f172a">'+m.name+posTag+' <span style="font-size:11px;color:#94a3b8">'+m.gender+'</span></div>'
       +'<div style="font-size:11px;color:#64748b;margin-top:1px">누적 '+m.cumulativePoints+'점</div>';
     var dv = div('','font-weight:900;color:#0ea5e9;font-size:14px;margin-right:8px'); dv.textContent=m.division;
     ap(item, avt(m), info, dv);
@@ -737,12 +760,12 @@ function pgAtt(){
     }).sort(function(a,b){return b.tot-a.tot;});
 
     var mc = card(S.aMonth+' 출석 통계','');
-    var hdr = div('row','margin-bottom:8px;font-size:10px;color:#64748b;font-weight:600');
+    var hdr = div('row','margin-bottom:8px;font-size:12px;color:#64748b;font-weight:600');
     hdr.innerHTML='<div style="flex:1">이름</div><div style="width:50px;text-align:center">📍오프</div><div style="width:50px;text-align:center">💬온라인</div><div style="width:40px;text-align:center">합계</div>';
     mc.appendChild(hdr);
     ms.forEach(function(item){
       var row = div('','display:flex;gap:6px;padding:7px 0;align-items:center;border-bottom:1px solid #1e2d44');
-      row.innerHTML='<div style="flex:1;font-weight:600">'+item.m.name+' <span style="font-size:10px;color:#64748b">'+item.m.division+'</span></div>'
+      row.innerHTML='<div style="flex:1;font-weight:600">'+item.m.name+' <span style="font-size:12px;color:#64748b">'+item.m.division+'</span></div>'
         +'<div style="width:50px;text-align:center;color:#f59e0b;font-weight:700">'+item.off+'</div>'
         +'<div style="width:50px;text-align:center;color:#3b82f6;font-weight:700">'+item.on+'</div>'
         +'<div style="width:40px;text-align:center;color:#10b981;font-weight:800">'+item.tot+'</div>';
@@ -797,7 +820,7 @@ function pgAtt(){
       if(isSelf && !canEdit()) item.style.cssText += ';border:1.5px solid '+cfg.color+';border-radius:8px;';
       var chk = div('chkBox'+(checked?' on':'')); if(checked){ var tk=span(''); tk.textContent='✓'; tk.style.cssText='color:#fff;font-size:10px;font-weight:900'; chk.appendChild(tk); }
       var nm = span(''); nm.textContent=m.name+(isSelf?' (나)':''); nm.style.cssText='font-size:12px;font-weight:'+(checked?700:400)+';color:'+(checked?cfg.color:(isSelf?'#0ea5e9':'#94a3b8'));
-      var dv2 = span(''); dv2.textContent=m.division; dv2.style.cssText='font-size:10px;color:#475569;margin-left:auto';
+      var dv2 = span(''); dv2.textContent=m.division; dv2.style.cssText='font-size:12px;color:#475569;margin-left:auto';
       ap(item, chk, nm, dv2);
       // 관리자는 전체, 일반 회원은 자기 자신만 체크 가능
       if(canEdit() || isSelf){
@@ -843,7 +866,7 @@ function pgMeetList(){
   sorted.forEach(function(mt){
     var item = div('','background:#fff;border-radius:12px;padding:12px 14px;cursor:pointer;display:flex;align-items:center;border:1.5px solid #e0f2fe;margin-bottom:8px;box-shadow:0 2px 8px rgba(14,165,233,.07)');
     var info = div('flex1');
-    info.innerHTML='<div style="font-weight:700;color:#0f172a">'+mt.title+'</div>'
+    info.innerHTML='<div style="font-weight:700;font-size:14px;color:#0f172a">'+mt.title+'</div>'
       +'<div style="font-size:12px;color:#64748b;margin-top:3px">'+mt.date+' · '+(mt.participants||[]).length+'명</div>';
     var bdgs = div('row','gap:4px;flex-shrink:0');
     ap(bdgs, typeBdg(mt.type), bdg(mt.status==='completed'?'Green':'Amber', mt.status==='completed'?'완료':'예정'));
@@ -1088,7 +1111,7 @@ function renderMtScoreboard(mt,slots,canInput){
     var total=getSlotTotal(mt,slots,rowSlot.id);
     var tr2=document.createElement('tr');
     var nameTd=document.createElement('td'); nameTd.className='nameCol';
-    nameTd.innerHTML='<span style="font-size:10px;color:#94a3b8">'+(ri+1)+'. </span><strong>'+rowSlot.label+'</strong>';
+    nameTd.innerHTML='<span style="font-size:11px;color:#94a3b8">'+(ri+1)+'. </span><strong>'+rowSlot.label+'</strong>';
     tr2.appendChild(nameTd);
 
     slots.forEach(function(colSlot,ci){
@@ -1226,7 +1249,7 @@ function renderMtConfirmResult(mt,slots){
       var row=div('rankRow');
       var cols=['#fbbf24','#94a3b8','#cd7c3a'];
       var rn=div('','width:22px;font-weight:900;font-size:12px;color:'+(cols[r.rank-1]||'#475569')); rn.textContent=r.rank;
-      var inf=div('flex1'); inf.innerHTML='<span style="font-weight:700">'+mem.name+'</span> <span style="font-size:10px;color:#64748b">'+mem.division+'</span>';
+      var inf=div('flex1'); inf.innerHTML='<span style="font-weight:700">'+mem.name+'</span> <span style="font-size:12px;color:#64748b">'+mem.division+'</span>';
       var st=div('','color:#64748b;font-size:11px;margin-right:5px'); st.textContent=r.total+'세트';
       ap(row,rn,inf,st);
       if(aw){
@@ -1269,7 +1292,7 @@ function pgMeetDetail(){
   var tr=div('row','margin-bottom:12px');
   var bb=h('button',{cls:'backBtn',onclick:function(){S.mtView='list';render();}},'←');
   var info=div('flex1');
-  info.innerHTML='<div style="font-weight:800;font-size:16px">'+mt.title+'</div>'
+  info.innerHTML='<div style="font-weight:800;font-size:15px">'+mt.title+'</div>'
     +'<div style="font-size:12px;color:#64748b;margin-top:2px">'+mt.date
     +(isPast?' &nbsp;<span style="color:#f43f5e;font-weight:700">종료</span>':'')
     +'</div>';
@@ -1410,8 +1433,8 @@ function pgOrg(){
       var chip=div('','background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:20px;padding:5px 12px;display:flex;align-items:center;gap:6px');
       var av2=div('','width:22px;height:22px;border-radius:50%;background:#dbeafe;border:1.5px solid #60a5fa;color:#1d4ed8;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0');
       av2.textContent=m.name.charAt(0);
-      var nm=div('','font-size:12px;font-weight:700;color:#0f172a'); nm.textContent=m.name;
-      var dv=div('','font-size:10px;color:#64748b'); dv.textContent=m.division;
+      var nm=div('','font-size:14px;font-weight:700;color:#0f172a'); nm.textContent=m.name;
+      var dv=div('','font-size:12px;color:#64748b'); dv.textContent=m.division;
       ap(chip,av2,nm,dv); chips.appendChild(chip);
     });
     gc.appendChild(chips); f.appendChild(gc);
@@ -1431,7 +1454,7 @@ function pgDiv(){
     var c=card(dv,dm.length+'명');
     dm.forEach(function(m,i){
       var row=div('row','padding:8px 0;'+(i<dm.length-1?'border-bottom:1px solid #e0f2fe':''));
-      var info=div('flex1'); info.innerHTML='<span style="font-weight:600">'+m.name+'</span> <span style="font-size:10px;color:#64748b">'+m.gender+' · '+m.cumulativePoints+'점</span>';
+      var info=div('flex1'); info.innerHTML='<span style="font-weight:700;font-size:14px">'+m.name+'</span> <span style="font-size:12px;color:#64748b">'+m.gender+' · '+m.cumulativePoints+'점</span>';
       row.appendChild(info);
       if(canEdit()){
         var ds=document.createElement('select');
@@ -1454,6 +1477,32 @@ function pgDiv(){
   if(!DB.members.length){ var e=div('empty'); e.textContent='회원을 먼저 추가해주세요.'; f.appendChild(e); }
   return f;
 }
+
+/* ===== 회원현황 통합 허브 ===== */
+function pgMembersHub(){
+  var f=frag();
+  /* 내부 탭 선택 바 */
+  var tabs=[
+    {id:'members', icon:'🎽', label:'회원명부'},
+    {id:'division', icon:'⚡', label:'부수관리'},
+    {id:'org', icon:'🎖️', label:'조직도'}
+  ];
+  var itBar=div('iTabs','margin-bottom:12px');
+  tabs.forEach(function(t){
+    var b=document.createElement('button');
+    b.className='iTab'+(S.memberHubTab===t.id?' on':'');
+    b.innerHTML=t.icon+' '+t.label;
+    b.onclick=function(){S.memberHubTab=t.id; render();};
+    itBar.appendChild(b);
+  });
+  f.appendChild(itBar);
+  /* 선택된 서브탭 렌더 */
+  if(S.memberHubTab==='members')  f.appendChild(pgMembers());
+  else if(S.memberHubTab==='division') f.appendChild(pgDiv());
+  else if(S.memberHubTab==='org')  f.appendChild(pgOrg());
+  return f;
+}
+/* ===== 회원현황 허브 끝 ===== */
 
 function pgBoard(){
   var f=frag();
@@ -1486,10 +1535,10 @@ function pgBoard(){
     head.appendChild(titleEl);
     if(post.pinned) head.appendChild(bdg('bdgAmber','공지'));
     c.appendChild(head);
-    var preview=div('','font-size:12px;color:#94a3b8;margin-bottom:8px;line-height:1.6;');
+    var preview=div('','font-size:13px;color:#94a3b8;margin-bottom:8px;line-height:1.6;');
     preview.textContent=post.content.length>60?post.content.substr(0,60)+'...':post.content;
     c.appendChild(preview);
-    var meta=div('row','font-size:10px;color:#475569;gap:10px');
+    var meta=div('row','font-size:12px;color:#475569;gap:10px');
     meta.innerHTML='<span>👤 '+escHtml(post.authorName)+'</span>'
       +'<span>📅 '+post.createdAt.substr(0,10)+'</span>'
       +'<span>💬 댓글 '+(post.comments||[]).length+'</span>';
@@ -1547,24 +1596,29 @@ function pgBoardDetail(){
   var tr=div('row','margin-bottom:14px');
   var bb=h('button',{cls:'backBtn',onclick:function(){S.tab='board';render();}},'←');
   tr.appendChild(bb);
+  var me0=getCurrentMember();
+  var isPostAuthor=me0&&post.authorId&&me0.id===post.authorId;
   if(canEdit()){
-    var delB=btn('bDark bSm','삭제',function(){
+    var pinB=btn('bDark bSm',post.pinned?'📌 공지해제':'📌 공지설정',function(){
+      post.pinned=!post.pinned; saveDB(); render();
+    });
+    tr.appendChild(pinB);
+  }
+  if(canEdit()||isPostAuthor){
+    var delB=btn('bRed bSm','삭제',function(){
       if(!confirm('삭제하시겠습니까?')) return;
       DB.posts=DB.posts.filter(function(p){return p.id!==S.boardPostId;});
       saveDB(true); S.tab='board'; render(); showToast('삭제되었습니다.');
     }); delB.style.marginLeft='auto';
-    var pinB=btn('bDark bSm',post.pinned?'📌 공지해제':'📌 공지설정',function(){
-      post.pinned=!post.pinned; saveDB(); render();
-    });
-    tr.appendChild(pinB); tr.appendChild(delB);
+    tr.appendChild(delB);
   }
   f.appendChild(tr);
 
   var c=card(null,null);
-  var titleEl=div('','font-weight:800;font-size:16px;margin-bottom:8px');
+  var titleEl=div('','font-weight:800;font-size:15px;margin-bottom:8px');
   titleEl.textContent=(post.pinned?'📌 ':'')+post.title;
   c.appendChild(titleEl);
-  var meta=div('','font-size:11px;color:#475569;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #e0f2fe');
+  var meta=div('','font-size:12px;color:#475569;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #e0f2fe');
   meta.innerHTML='👤 '+escHtml(post.authorName)+' &nbsp; 📅 '+post.createdAt.substr(0,10);
   c.appendChild(meta);
   var body=div('','font-size:14px;color:#0f172a;line-height:1.8;white-space:pre-wrap');
@@ -1574,7 +1628,7 @@ function pgBoardDetail(){
   var cc=card('💬 댓글 '+(post.comments||[]).length+'개','');
   (post.comments||[]).forEach(function(cm){
     var crow=div('','padding:8px 0;border-bottom:1px solid #e0f2fe');
-    var cmeta=div('','font-size:10px;color:#475569;margin-bottom:4px');
+    var cmeta=div('','font-size:12px;color:#475569;margin-bottom:4px');
     cmeta.textContent=cm.authorName+' · '+cm.createdAt.substr(0,10);
     var ctxt=div('','font-size:13px;color:#0f172a;line-height:1.6');
     ctxt.textContent=cm.content;
@@ -1642,7 +1696,6 @@ function pgVote(){
     var e=div('empty'); e.textContent='등록된 투표가 없습니다.'; f.appendChild(e); return f;
   }
 
-  var vid=getVoterId();
   polls.forEach(function(poll){
     var c=div('pollCard');
     var head=div('row','margin-bottom:6px;flex-wrap:wrap;gap:4px');
@@ -1656,18 +1709,11 @@ function pgVote(){
     c.appendChild(head);
 
     var totalVotes=(poll.votes||[]).length;
-    var preview=div('','font-size:12px;color:#64748b;margin-bottom:8px');
+    var preview=div('','font-size:13px;color:#64748b;margin-bottom:8px');
     preview.textContent='선택지 '+(poll.options||[]).length+'개  ·  총 '+totalVotes+'표';
     c.appendChild(preview);
 
-    var myVote=(poll.votes||[]).find(function(v){return v.voterId===vid;});
-    if(myVote){
-      var mv=div('','font-size:11px;color:#059669;font-weight:700;margin-bottom:4px');
-      mv.textContent='✅ 투표 완료 ('+escHtml(poll.options[myVote.optionIndex])+')';
-      c.appendChild(mv);
-    }
-
-    var meta=div('row','font-size:10px;color:#475569;gap:10px');
+    var meta=div('row','font-size:12px;color:#475569;gap:10px');
     meta.innerHTML='<span>👤 '+escHtml(poll.authorName)+'</span>'
       +'<span>📅 '+poll.createdAt.substr(0,10)+'</span>';
     c.appendChild(meta);
@@ -1779,25 +1825,30 @@ function pgVoteDetail(){
   var tr=div('row','margin-bottom:14px');
   tr.appendChild(h('button',{cls:'backBtn',onclick:function(){S.tab='vote';render();}},'←'));
 
+  var me1=getCurrentMember();
+  var isPollAuthor=me1&&poll.authorId&&me1.id===poll.authorId;
   if(canEdit()){
     var closeB=btn('bDark bSm',poll.status==='active'?'투표 마감':'재개',function(){
       poll.status=poll.status==='active'?'closed':'active';
       saveDB(true); render();
     });
     closeB.style.marginLeft='auto';
+    tr.appendChild(closeB);
+  }
+  if(canEdit()||isPollAuthor){
     var delB=btn('bRed bSm','삭제',function(){
       if(!confirm('이 투표를 삭제하시겠습니까?')) return;
       DB.polls=DB.polls.filter(function(p){return p.id!==S.voteId;});
       saveDB(true); S.tab='vote'; render(); showToast('삭제되었습니다.');
     });
-    tr.appendChild(closeB); tr.appendChild(delB);
+    tr.appendChild(delB);
   }
   f.appendChild(tr);
 
   var c=card(null,null);
   /* 제목/배지 */
   var hrow=div('row','margin-bottom:6px;flex-wrap:wrap;gap:6px');
-  var titleEl=div('flex1','font-weight:800;font-size:16px');
+  var titleEl=div('flex1','font-weight:800;font-size:15px');
   titleEl.textContent=poll.title;
   hrow.appendChild(titleEl);
   var bdgRow=div('row','gap:4px');
@@ -1806,36 +1857,45 @@ function pgVoteDetail(){
   hrow.appendChild(bdgRow);
   c.appendChild(hrow);
 
-  var meta=div('','font-size:11px;color:#475569;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #e0f2fe');
+  var meta=div('','font-size:12px;color:#475569;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #e0f2fe');
   meta.innerHTML='👤 '+escHtml(poll.authorName)+' &nbsp; 📅 '+poll.createdAt.substr(0,10);
   c.appendChild(meta);
 
   if(poll.content){
-    var bodyEl=div('','font-size:13px;color:#0f172a;line-height:1.8;white-space:pre-wrap;margin-bottom:14px;padding:10px;background:#f8fafc;border-radius:8px');
+    var bodyEl=div('','font-size:14px;color:#0f172a;line-height:1.8;white-space:pre-wrap;margin-bottom:14px;padding:10px;background:#f8fafc;border-radius:8px');
     bodyEl.textContent=poll.content;
     c.appendChild(bodyEl);
   }
 
   var vid=getVoterId();
-  var myVote=(poll.votes||[]).find(function(v){return v.voterId===vid;});
   var totalVotes=(poll.votes||[]).length;
 
   /* 선택지 목록 + 투표 */
-  var optLabel=div('','font-weight:700;font-size:13px;color:#0f172a;margin-bottom:8px');
+  var optLabel=div('','font-weight:700;font-size:14px;color:#0f172a;margin-bottom:8px');
   optLabel.textContent='📋 선택지 (총 '+totalVotes+'표)';
   c.appendChild(optLabel);
 
+  if(authLv>=1 && poll.status==='active'){
+    var guide=div('','font-size:11px;color:#64748b;margin-bottom:10px;padding:7px 10px;background:#f0f9ff;border-radius:8px;border:1px solid #bae6fd');
+    guide.textContent='👆 선택지를 클릭해서 투표하세요. 다시 클릭하면 취소됩니다.';
+    c.appendChild(guide);
+  }
+
   poll.options.forEach(function(opt,i){
     var votesForOpt=(poll.votes||[]).filter(function(v){return v.optionIndex===i;});
+    /* 현재 사용자가 이 옵션에 투표했는지 확인 */
+    var iVotedThis=(poll.votes||[]).some(function(v){return v.optionIndex===i && v.voterId===vid;});
     var pct=totalVotes>0?Math.round(votesForOpt.length/totalVotes*100):0;
-    var isMyChoice=myVote&&myVote.optionIndex===i;
-    var ob=div('pollOption'+(isMyChoice?' voted':''));
+
+    var ob=div('pollOption'+(iVotedThis?' voted':''));
     var orow=div('row','margin-bottom:4px');
+    var checkIcon=div('','font-size:14px;margin-right:6px;flex-shrink:0');
+    checkIcon.textContent=iVotedThis?'✅':'⬜';
     var optTxt=div('flex1','font-size:14px;font-weight:600;color:#0f172a');
     optTxt.textContent=opt;
-    var cntEl=div('','font-size:12px;font-weight:700;color:'+(isMyChoice?'#059669':'#64748b'));
+    var cntEl=div('','font-size:12px;font-weight:700;color:'+(iVotedThis?'#059669':'#64748b'));
     cntEl.textContent=votesForOpt.length+'표 ('+pct+'%)';
-    ap(orow,optTxt,cntEl); ob.appendChild(orow);
+    ap(orow,checkIcon,optTxt,cntEl); ob.appendChild(orow);
 
     /* 진행바 */
     var barBg=div('pollBarBg');
@@ -1854,31 +1914,35 @@ function pgVoteDetail(){
       ob.appendChild(vnames);
     }
 
-    /* 투표 가능 시 클릭 이벤트 */
-    if(authLv>=1 && poll.status==='active' && !myVote){
-      ob.classList.add('selected');
-      (function(idx){
+    /* 투표 클릭: 선택 ↔ 취소 토글 (팝업 없음) */
+    if(authLv>=1 && poll.status==='active'){
+      (function(idx, alreadyVoted){
         ob.onclick=function(){
-          if(!confirm('"'+escHtml(opt)+'"에 투표하시겠습니까?')) return;
           poll.votes=poll.votes||[];
-          var entry={voterId:vid, optionIndex:idx, createdAt:new Date().toISOString()};
-          if(!poll.anonymous) entry.voterName=getVoterName();
-          poll.votes.push(entry);
-          saveDB(true); render(); showToast('✅ 투표 완료!');
+          if(alreadyVoted){
+            /* 내 투표 취소 (해당 옵션의 내 첫 번째 투표 제거) */
+            var removed=false;
+            poll.votes=poll.votes.filter(function(v){
+              if(!removed && v.optionIndex===idx && v.voterId===vid){ removed=true; return false; }
+              return true;
+            });
+            saveDB(true); render(); showToast('↩️ 투표를 취소했습니다.');
+          } else {
+            /* 투표 추가 */
+            var entry={voterId:vid, optionIndex:idx, createdAt:new Date().toISOString()};
+            if(!poll.anonymous) entry.voterName=getVoterName();
+            poll.votes.push(entry);
+            saveDB(true); render(); showToast('✅ 투표했습니다!');
+          }
         };
-      })(i);
+      })(i, iVotedThis);
     } else {
       ob.style.cursor='default';
     }
     c.appendChild(ob);
   });
 
-  /* 이미 투표했으면 안내 */
-  if(myVote){
-    var doneEl=div('infoBox','margin-top:8px');
-    doneEl.textContent='✅ 이미 투표하셨습니다. (선택: '+escHtml(poll.options[myVote.optionIndex])+')';
-    c.appendChild(doneEl);
-  } else if(poll.status!=='active'){
+  if(poll.status!=='active'){
     var endEl=div('warnBox','margin-top:8px');
     endEl.textContent='🔒 종료된 투표입니다.';
     c.appendChild(endEl);
@@ -2064,7 +2128,7 @@ function pgVisit(){
     var si3=VISIT_SLOTS.indexOf(v.startSlot||v.timeSlot);
     var ei3=VISIT_SLOTS.indexOf(v.endSlot||v.timeSlot);
     if(si3>=0&&ei3>si3) dur=' ('+((ei3-si3)*30)+'분)';
-    info.innerHTML='<div style="font-weight:700;color:#0f172a">'+(isMe?'<span style="color:#059669">✓ </span>':'')+v.memberName+'</div>'
+    info.innerHTML='<div style="font-weight:700;font-size:14px;color:#0f172a">'+(isMe?'<span style="color:#059669">✓ </span>':'')+v.memberName+'</div>'
       +'<div style="font-size:11px;color:#0ea5e9;margin-top:1px">'+(v.startSlot||v.timeSlot)+' ~ '+(v.endSlot||v.timeSlot)+dur+'</div>';
     ap(vrow,avEl,info);
     if(isMe||canEdit()){
